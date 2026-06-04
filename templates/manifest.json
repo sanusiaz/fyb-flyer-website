@@ -1,0 +1,42 @@
+[
+    {
+        "id": "template_1",
+        "name": "First Template",
+        "file": "template_1.html",
+        "screenshot": "screenshots/template_1.png",
+        "description": "A vibrant green-themed FYB card with artistic photo frame and detailed personality showcase.",
+        "colors": [
+            "#1a472a",
+            "#3a7d44",
+            "#c9a84c"
+        ],
+        "fields": [
+            "surname",
+            "firstName",
+            "middleName",
+            "nickName",
+            "department",
+            "university",
+            "universityLogo",
+            "departmentLogo",
+            "organization",
+            "orgFullName",
+            "orgAcronym",
+            "dob",
+            "hobbies",
+            "classPals",
+            "specialization",
+            "relationshipStatus",
+            "favoriteCourse",
+            "favoriteLecturer",
+            "stressfulLevel",
+            "classCrush",
+            "ifNotDept",
+            "bestQuote",
+            "socialMedia",
+            "skills",
+            "gradYear",
+            "photo"
+        ]
+    }
+]

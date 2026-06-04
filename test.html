@@ -1,0 +1,1071 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality of the Day</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cherish&family=Ole&family=Permanent+Marker&display=swap');
+
+        .template_1_ole-regular {
+            font-family: "Ole", cursive !important;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .template_1_cherish-regular {
+            font-family: "Cherish", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .template_1_permanent-marker-regular {
+            font-family: "Permanent Marker", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .template_1_card {
+            width: 480px;
+            background: url('./images/grad-image.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            position: relative;
+            font-family: 'Barlow', sans-serif;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ===================== LEFT PANEL ===================== */
+        .template_1_left {
+            width: 188px;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template_1_sidebar-label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 26px;
+            background: #0a4520;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .template_1_sidebar-label span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 13.5px;
+            color: #ffffff;
+            letter-spacing: 5px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-transform: uppercase;
+        }
+
+        .template_1_photo-zone {
+            position: absolute;
+            left: 26px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #b5834a;
+            overflow: hidden;
+        }
+
+        .template_1_photo-zone::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #1a7a40;
+            clip-path: polygon(8% 2%, 94% 0%, 98% 88%, 90% 100%, 2% 96%, 0% 10%);
+            z-index: 1;
+        }
+
+        .template_1_photo-placeholder {
+            position: absolute;
+            inset: 0;
+            bottom: 88px;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .template_1_photo-placeholder svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .template_1_name-block {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 88px;
+            background: #0e5c2a;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 6px 8px;
+        }
+
+        .template_1_meet-script {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 1px;
+        }
+
+        .template_1_last-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .template_1_first-name {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 500;
+            font-size: 10.5px;
+            color: #a8e6be;
+            letter-spacing: 0.8px;
+            line-height: 1.3;
+        }
+
+        .template_1_nick-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 600;
+            font-size: 10px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        .template_1_the-tag {
+            position: absolute;
+            bottom: 10px;
+            left: 6px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 2px;
+            transform: scaleX(-1);
+            z-index: 6;
+        }
+
+        /* ===================== RIGHT PANEL ===================== */
+        .template_1_right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 9px 10px 9px 8px;
+            background: #0e5c2a;
+            gap: 0;
+        }
+
+        /* --- Top header --- */
+        .template_1_top-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+
+        .template_1_logos {
+            display: flex;
+            gap: 3px;
+            padding-top: 1px;
+        }
+
+        .template_1_logo-dot {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .template_1_logo-dot span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 7px;
+            color: #fff;
+            letter-spacing: 0;
+            line-height: 1;
+        }
+
+        .template_1_org-text {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 6px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            line-height: 1.55;
+        }
+
+        /* --- Class badge --- */
+        .template_1_class-badge-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3px;
+            position: relative;
+        }
+
+        .template_1_class-badge {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            background: rgba(0, 0, 0, 0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .template_1_grad-cap-svg {
+            position: absolute;
+            top: -14px;
+            right: -10px;
+            width: 34px;
+            height: 28px;
+        }
+
+        .template_1_class-of {
+            font-family: 'Great Vibes', cursive;
+            font-size: 11px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .template_1_class-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        /* --- Section title --- */
+        .template_1_section-title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 17px;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+
+        /* ===================== INFO ROWS ===================== */
+        .template_1_row {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 2.8px;
+            border-radius: 3px;
+            overflow: hidden;
+            min-height: 21px;
+        }
+
+        .template_1_row-icon {
+            width: 21px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .template_1_row-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2px 6px;
+        }
+
+        .template_1_row-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 5.8px;
+            font-weight: 700;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            opacity: 0.75;
+        }
+
+        .template_1_row-value {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+        .template_1_r1 {
+            background: #e8922a;
+        }
+
+        .template_1_r1 .template_1_row-icon {
+            background: #c4720a;
+            color: #fff;
+        }
+
+        .template_1_r1 .template_1_row-label,
+        .template_1_r1 .template_1_row-value {
+            color: #3a1800;
+        }
+
+        .template_1_r2 {
+            background: #3bbf6a;
+        }
+
+        .template_1_r2 .template_1_row-icon {
+            background: #1e9a4a;
+            color: #fff;
+        }
+
+        .template_1_r2 .template_1_row-label,
+        .template_1_r2 .template_1_row-value {
+            color: #012a10;
+        }
+
+        .template_1_r3 {
+            background: #f5a623;
+        }
+
+        .template_1_r3 .template_1_row-icon {
+            background: #c87e00;
+            color: #fff;
+        }
+
+        .template_1_r3 .template_1_row-label,
+        .template_1_r3 .template_1_row-value {
+            color: #3a2000;
+        }
+
+        .template_1_r4 {
+            background: #f0d800;
+        }
+
+        .template_1_r4 .template_1_row-icon {
+            background: #b8a200;
+            color: #fff;
+        }
+
+        .template_1_r4 .template_1_row-label,
+        .template_1_r4 .template_1_row-value {
+            color: #2a2000;
+        }
+
+        .template_1_r5 {
+            background: #e03030;
+        }
+
+        .template_1_r5 .template_1_row-icon {
+            background: #a80e0e;
+            color: #fff;
+        }
+
+        .template_1_r5 .template_1_row-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .template_1_r5 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r6 {
+            background: #20b8a8;
+        }
+
+        .template_1_r6 .template_1_row-icon {
+            background: #0a9080;
+            color: #fff;
+        }
+
+        .template_1_r6 .template_1_row-label,
+        .template_1_r6 .template_1_row-value {
+            color: #002820;
+        }
+
+        .template_1_r7 {
+            background: #8a8a8a;
+        }
+
+        .template_1_r7 .template_1_row-icon {
+            background: #5a5a5a;
+            color: #fff;
+        }
+
+        .template_1_r7 .template_1_row-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .template_1_r7 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r8 {
+            background: #d4601a;
+        }
+
+        .template_1_r8 .template_1_row-icon {
+            background: #a03800;
+            color: #fff;
+        }
+
+        .template_1_r8 .template_1_row-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .template_1_r8 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r9 {
+            background: #e85080;
+        }
+
+        .template_1_r9 .template_1_row-icon {
+            background: #b02050;
+            color: #fff;
+        }
+
+        .template_1_r9 .template_1_row-label,
+        .template_1_r9 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r10 {
+            background: #8050d8;
+        }
+
+        .template_1_r10 .template_1_row-icon {
+            background: #5020a0;
+            color: #fff;
+        }
+
+        .template_1_r10 .template_1_row-label,
+        .template_1_r10 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r11 {
+            background: #b81818;
+        }
+
+        .template_1_r11 .template_1_row-icon {
+            background: #880000;
+            color: #fff;
+        }
+
+        .template_1_r11 .template_1_row-label,
+        .template_1_r11 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r12 {
+            background: #c82870;
+        }
+
+        .template_1_r12 .template_1_row-icon {
+            background: #981050;
+            color: #fff;
+        }
+
+        .template_1_r12 .template_1_row-label,
+        .template_1_r12 .template_1_row-value {
+            color: #fff;
+        }
+
+        .template_1_r13 {
+            background: #2870d8;
+        }
+
+        .template_1_r13 .template_1_row-icon {
+            background: #0848a8;
+            color: #fff;
+        }
+
+        .template_1_r13 .template_1_row-label,
+        .template_1_r13 .template_1_row-value {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- FYB Template 1 -->
+    <div id="fyb-template" style="
+  width: 800px;
+  height: 1000px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  background: url('../../images/grad-image-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #3a644a;
+  background-blend-mode: soft-light;
+  box-sizing: border-box;
+">
+
+        <div style="
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(58,125,68,0.12) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  "></div>
+        <div
+            style="position: absolute; top: 10px; right: 10px; width: 50px; height: 50px; border-top: 2px solid rgba(201,168,76,0.35); border-right: 2px solid rgba(201,168,76,0.35); border-radius: 0 6px 0 0; z-index: 1; pointer-events: none;">
+        </div>
+        <div
+            style="position: absolute; bottom: 10px; right: 10px; width: 50px; height: 50px; border-bottom: 2px solid rgba(201,168,76,0.35); border-right: 2px solid rgba(201,168,76,0.35); border-radius: 0 0 6px 0; z-index: 1; pointer-events: none;">
+        </div>
+        <div
+            style="position: absolute; top: 10px; left: 10px; width: 50px; height: 50px; border-top: 2px solid rgba(201,168,76,0.2); border-left: 2px solid rgba(201,168,76,0.2); border-radius: 6px 0 0 0; z-index: 1; pointer-events: none;">
+        </div>
+        <div
+            style="position: absolute; bottom: 10px; left: 10px; width: 50px; height: 50px; border-bottom: 2px solid rgba(201,168,76,0.2); border-left: 2px solid rgba(201,168,76,0.2); border-radius: 0 0 0 6px; z-index: 1; pointer-events: none;">
+        </div>
+
+
+        <div style="height: 1000px; z-index: 2; text-wrap: inherit; word-break: break-all; display: flex;">
+
+            <div style="
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 85px;
+    height: 100%;
+    background: rgb(0 0 0 / 40%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(201,168,76,0.25);
+  ">
+                <span style="
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 20px;
+      letter-spacing: 6px; text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      white-space: nowrap;
+      display: flex;
+      gap: 30px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    "> <span style="rotate: 90deg; bottom: 50px; padding: 0px;">The</span><span
+                        style="font-size: 70px;">Illuminators</span> </span>
+            </div>
+
+
+            <div style="
+    width: 100%;
+    display: flex;
+    padding: 0px 5px;
+    flex-wrap: wrap;
+    word-break: break-all;
+    padding-right: 0px;
+">
+                <div
+                    style="width: 50%;position: relative;height: 100%;flex-direction: column;display: flex;gap: 120px;align-items: center;align-self: center;text-align: center;justify-content: stretch;">
+                    <div style="z-index: 3;position: relative;top: 50px;">
+
+                        <div
+                            style="position: absolute; top: -16px; left: 200px; width: 14px; height: 14px; background: rgba(58,125,68,0.5); border-radius: 50%; z-index: 1;">
+                        </div>
+                        <div
+                            style="position: absolute; top: 310px; left: -14px; width: 10px; height: 10px; background: rgba(201,168,76,0.35); border-radius: 50%; z-index: 1;">
+                        </div>
+                        <div
+                            style="position: absolute; top: -8px; left: 240px; width: 8px; height: 8px; background: rgba(201,168,76,0.3); border-radius: 50%; z-index: 1;">
+                        </div>
+
+                        <div
+                            style="z-index: -1;left: -100px;background-image: url('../images/image-vector.png');overflow: visible;display: block;background-repeat: no-repeat;background-size: 81% 98%;background-position: 57px bottom;height: 643px;width: 513px;overflow: hidden;display: flex;place-content: center;place-items: center;overflow: hidden;margin-left: 20px;">
+
+                            <img src="" alt="Student Photo" style="
+        position: relative;
+        top: 21px;
+        left: -4px;
+        max-width: 300px;
+        min-height: 600px;
+        object-fit: fill;
+        border-radius: 8px;
+      ">
+                        </div>
+
+                    </div>
+
+                    <div style="padding: 0px;z-index: 3; text-align: center;position: relative;">
+                        <div class="template_1_cherish-regular"
+                            style="position: absolute;top: -135px;left: calc(50% - 203px / 2);font-size: 115px;color: white;line-height: 1;margin-bottom: 0;text-shadow: 0 2px 4px rgba(0,0,0,0.35);">
+                            Meet</div>
+                        <div class="template_1_permanent-marker-regular"
+                            style="font-size: 35px;font-weight: 900;text-transform: uppercase;line-height: 1.05;color: #d0ff20;letter-spacing: 3px;text-shadow: 0 2px 8px rgba(0,0,0,0.45);margin-bottom: 2px;">
+                            John</div>
+                        <div
+                            style="font-family: 'Montserrat', sans-serif;font-size: 20px;font-weight: 400;color: rgba(255,255,255,0.85);letter-spacing: 2px;text-transform: uppercase;word-break: auto-phrase;">
+                            Doe Martin</div>
+
+                        <div
+                            style="font-weight: bolder;font-family: 'Montserrat', sans-serif; margin-top: 10px; font-size: 22px;color: white;letter-spacing: 2px;text-transform: uppercase;word-break: auto-phrase;">
+                            <span style="color:#ff6c00;"> Nick Name:</span> johndoe
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="width: 50%;right: 2px;position: relative;display: flex;flex-direction: column;gap: 20px;padding-top: 30px;padding-left: 10px;background: #1726179c;padding-right: 5px;">
+                    <div style="text-align: center;z-index: 3;display: flex;gap: 1px;flex-direction: column;">
+                        <div
+                            style="display: flex;align-items: center;justify-content: center;gap: 2px;padding-bottom: 5px;">
+
+                            <div
+                                style="width: 25px; height: 25px; border: 1px solid white; border-radius: 100%; overflow: hidden; background-color: white; opacity: 0.9;">
+                                <img style="width: 100%; height: 100%; object-fit: fill; scale: .8;"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                                    alt="university logo">
+                            </div>
+                            <div
+                                style="width: 25px; height: 25px; border: 1px solid white; border-radius: 100%; overflow: hidden; background-color: white; opacity: 0.9;">
+                                <img style="width: 100%; height: 100%; object-fit: fill; scale: .8;"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                                    alt="university logo">
+                            </div>
+                        </div>
+
+                        <div
+                            style="font-size: 7px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ffffff; margin-bottom: 1px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); text-transform: uppercase;">
+                            African Society Of International Studies (ASIS)
+                        </div>
+                        <div
+                            style="font-size: 6px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin-bottom: 1px; text-transform: uppercase;">
+                            DEPARTMENT OF POLITICAL SCIENCE AND INTERNATIONAL STUDIES</div>
+
+                        <div
+                            style="font-size: 6px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #fff;">
+                            AHMADU BELLO UNIVERSITY</div>
+                    </div>
+
+                    <div style="text-align: center;z-index: 3;position: relative;margin-top: 10px;">
+                        <div
+                            style="font-size: 36px;line-height: 1;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));margin-bottom: 0;position: absolute;right: calc(50% - 52px);top: -25px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 20 20">
+                                <path d="M0 0h20v20H0z" fill="none"></path>
+                                <path fill="currentColor"
+                                    d="M3.302 12.238c.464 1.879 1.054 2.701 3.022 3.562c1.969.86 2.904 1.8 3.676 1.8c.771 0 1.648-.822 3.616-1.684c1.969-.861 1.443-1.123 1.907-3.002L10 15.6zm16.209-4.902l-8.325-4.662c-.652-.365-1.72-.365-2.372 0L.488 7.336c-.652.365-.652.963 0 1.328l8.325 4.662c.652.365 1.72.365 2.372 0l5.382-3.014l-5.836-1.367a3 3 0 0 1-.731.086c-1.052 0-1.904-.506-1.904-1.131c0-.627.853-1.133 1.904-1.133c.816 0 1.51.307 1.78.734l6.182 2.029l1.549-.867c.651-.364.651-.962 0-1.327m-2.544 8.834c-.065.385 1.283 1.018 1.411-.107c.579-5.072-.416-6.531-.416-6.531l-1.395.781c0-.001 1.183 1.125.4 5.857">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            style="font-family: 'Great Vibes', cursive;position: absolute;left: calc(35%);top: calc(-9%);font-weight: bolder;z-index: 3;width: max-content;font-size: 18px;color: #e4c572;line-height: 1;text-shadow: 0 1px 3px rgba(0,0,0,0.3);">
+                            Class of
+                        </div>
+
+                        <div class="template_1_ole-regular"
+                            style="font-family: 'Montserrat', sans-serif;top: 10px;left: calc(50% - 70px/2);font-size: 90px;font-weight: 900;color: black;line-height: 1;letter-spacing: 2px;text-shadow: -3px -3px 0 #fff, 3px -3px 0 #fff, -3px 3px 0 #fff, 3px 3px 0 #fff, 0px -3px 0 #fff, 0px 3px 0 #fff, -3px 0px 0 #fff, 3px 0px 0 #fff, 0px 5px 5px rgba(0,0,0,0.5);">
+                            25
+                        </div>
+                    </div>
+
+                    <div style="width: 100%;text-align: center;z-index: 3;position: relative;text-align: center;">
+                        <div
+                            style="font-family: 'Great Vibes', cursive; font-weight: bolder; font-size: 26px; color: #ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.35); line-height: 1;">
+                            Personality of the Day</div>
+                    </div>
+
+                    <div style="text-transform: uppercase;display: flex;flex-direction: column;gap: 15px;">
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(223, 125, 13); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 20 20">
+                                    <path d="M0 0h20v20H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="m6.75.98l-.884.883a1.25 1.25 0 1 0 1.768 0zm6.5 0l-.884.883a1.25 1.25 0 1 0 1.768 0zM10 .98l.884.883a1.25 1.25 0 1 1-1.768 0zM7.5 5.75a.75.75 0 0 0-1.5 0v.464c-1.179.305-2 1.39-2 2.622v.094q.15-.03.306-.052A43 43 0 0 1 10 8.5c1.93 0 3.83.129 5.694.378q.156.021.306.052v-.094c0-1.232-.821-2.317-2-2.622V5.75a.75.75 0 0 0-1.5 0v.318a46 46 0 0 0-1.75-.062V5.75a.75.75 0 0 0-1.5 0v.256q-.88.014-1.75.062zm-2.995 4.615A41 41 0 0 1 10 10q2.796.002 5.495.365C16.967 10.562 18 11.838 18 13.28v.693a3.7 3.7 0 0 1-1.665-.393a5.22 5.22 0 0 0-4.67 0a3.72 3.72 0 0 1-3.33 0a5.22 5.22 0 0 0-4.67 0A3.7 3.7 0 0 1 2 13.972v-.693c0-1.441 1.033-2.717 2.505-2.914m11.16 4.555a5.2 5.2 0 0 0 2.335.552V16.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 16.5v-1.028c.8 0 1.6-.184 2.335-.551a3.72 3.72 0 0 1 3.33 0c1.47.735 3.2.735 4.67 0a3.72 3.72 0 0 1 3.33 0">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">DATE
+                                    OF BIRTH</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    20th September</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(28, 231, 62); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 14 14">
+                                    <path d="M0 0h14v14H0z" fill="none"></path>
+                                    <path fill="currentColor" fill-rule="evenodd"
+                                        d="M.25 1.25a1 1 0 0 1 1-1h6.437a1 1 0 0 1 1 1v2.813H6.313a2.25 2.25 0 0 0-2.25 2.25v2.374H1.25a1 1 0 0 1-1-1zm2.551 2.499h-.036c-.56 0-1.013-.453-1.013-1.013v-.013a1 1 0 0 1 1-1h.014A1.013 1.013 0 0 1 2.8 3.75m3.512 1.564a1 1 0 0 0-1 1v6.437a1 1 0 0 0 1 1h6.437a1 1 0 0 0 1-1V6.313a1 1 0 0 0-1-1zm4.569 3.659a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-1.7 2.12a1 1 0 1 1-2 0a1 1 0 0 1 2 0"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">HOBBIES</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Watching Movies, Dancing, Reading</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(243, 201, 17); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 32 32">
+                                    <path d="M0 0h32v32H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="M21.066 20.667c1.227-.682 1.068-3.31-.354-5.874c-.61-1.104-1.36-1.998-2.11-2.623a5.23 5.23 0 0 1-3.1 1.03a5.23 5.23 0 0 1-3.105-1.03c-.75.625-1.498 1.52-2.11 2.623c-1.423 2.563-1.58 5.192-.35 5.874c.548.312 1.126.078 1.722-.496a10.5 10.5 0 0 0-.167 1.874c0 2.938 1.14 5.312 2.543 5.312c.846 0 1.265-.865 1.466-2.188c.2 1.314.62 2.188 1.46 2.188c1.397 0 2.546-2.375 2.546-5.312c0-.66-.062-1.29-.168-1.873c.6.575 1.176.813 1.726.497zM15.5 12.2a4.279 4.279 0 1 0-.003-8.557A4.279 4.279 0 0 0 15.5 12.2m8.594 2.714a3.514 3.514 0 0 0 0-7.025a3.513 3.513 0 1 0 .001 7.027zm4.28 2.13c-.502-.908-1.116-1.642-1.732-2.155a4.3 4.3 0 0 1-2.546.845c-.756 0-1.46-.207-2.076-.55c.496 1.093.803 2.2.86 3.19c.094 1.516-.38 2.64-1.328 3.165a2 2 0 0 1-.653.224c-.057.392-.096.8-.096 1.23c0 2.413.935 4.362 2.088 4.362c.694 0 1.04-.71 1.204-1.796c.163 1.08.508 1.796 1.2 1.796c1.145 0 2.09-1.95 2.09-4.36c0-.543-.053-1.06-.14-1.54c.492.473.966.668 1.418.408c1.007-.56.877-2.718-.29-4.82zm-21.468-2.13a3.512 3.512 0 1 0-3.514-3.512a3.515 3.515 0 0 0 3.514 3.514zm2.535 6.622c-1.592-.885-1.738-3.524-.456-6.354a4.24 4.24 0 0 1-2.078.553c-.956 0-1.832-.32-2.55-.846c-.615.512-1.228 1.246-1.732 2.153c-1.167 2.104-1.295 4.262-.287 4.82c.45.258.925.065 1.414-.406a9 9 0 0 0-.135 1.538c0 2.412.935 4.36 2.088 4.36c.694 0 1.04-.71 1.204-1.795c.165 1.08.51 1.796 1.2 1.796c1.147 0 2.09-1.95 2.09-4.36c0-.433-.04-.842-.097-1.234a2 2 0 0 1-.66-.226z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Class
+                                    Pals</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    John and Joe</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(40, 17, 243); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="M18.483 16.767A8.5 8.5 0 0 1 8.118 7.081a1 1 0 0 1-.113.097c-.28.213-.63.292-1.33.45l-.635.144c-2.46.557-3.69.835-3.983 1.776c-.292.94.546 1.921 2.223 3.882l.434.507c.476.557.715.836.822 1.18c.107.345.071.717-.001 1.46l-.066.677c-.253 2.617-.38 3.925.386 4.506s1.918.052 4.22-1.009l.597-.274c.654-.302.981-.452 1.328-.452s.674.15 1.329.452l.595.274c2.303 1.06 3.455 1.59 4.22 1.01c.767-.582.64-1.89.387-4.507z">
+                                    </path>
+                                    <path fill="currentColor"
+                                        d="m9.153 5.408l-.328.588c-.36.646-.54.969-.82 1.182q.06-.045.113-.097a8.5 8.5 0 0 0 10.366 9.686l-.02-.19c-.071-.743-.107-1.115 0-1.46c.107-.344.345-.623.822-1.18l.434-.507c1.677-1.96 2.515-2.941 2.222-3.882c-.292-.941-1.522-1.22-3.982-1.776l-.636-.144c-.699-.158-1.049-.237-1.33-.45c-.28-.213-.46-.536-.82-1.182l-.327-.588C13.58 3.136 12.947 2 12 2s-1.58 1.136-2.847 3.408"
+                                        opacity=".5"></path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Specialization</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    International Affairs</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(255, 255, 255); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="#fc4646" fill-rule="evenodd"
+                                        d="M21.236 4.911a5.67 5.67 0 0 0-8.02 0l-1.21 1.21l-1.21-1.21a5.671 5.671 0 1 0-8.02 8.02l9.23 9.23l1.48-1.479l-2.126-2.125a4.173 4.173 0 0 1 5.787-6.013a4.18 4.18 0 0 1 4.869-.584a5.67 5.67 0 0 0-.78-7.049m-4.09 9.75l-.944-.946a2.674 2.674 0 0 0-3.781 3.781l4.726 4.726l4.726-4.726a2.674 2.674 0 0 0-3.78-3.78z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Relationship
+                                    Status</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Single</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(212, 38, 175); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="M7.833 18c1.4 0 2.62.819 3.195 2.028a1 1 0 0 1-1.806.86A1.54 1.54 0 0 0 7.833 20H3a1 1 0 1 1 0-2zM21 18a1 1 0 1 1 0 2h-4.833c-.567 0-1.135.357-1.389.889a1 1 0 0 1-1.806-.86A3.58 3.58 0 0 1 16.167 18z">
+                                    </path>
+                                    <path fill="currentColor" fill-rule="evenodd"
+                                        d="M8.889 3.006a4.33 4.33 0 0 1 3.11 1.564A4.33 4.33 0 0 1 15.333 3H22a1 1 0 0 1 1 1v12.001a1 1 0 0 1-1 1L15.333 17c-.658 0-1.085.162-1.372.354a1.93 1.93 0 0 0-.65.76A3.1 3.1 0 0 0 13 19.33v.009l-.005.097a1 1 0 0 1-1.99 0L11 19.334v-.005l-.004-.068a3.1 3.1 0 0 0-.305-1.151a1.9 1.9 0 0 0-.64-.76c-.28-.19-.698-.35-1.343-.35H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6.667zM11 5v12.334h2V5z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Favorite
+                                    Course</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    ATEN 301</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(219, 20, 36); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 512 512">
+                                    <path d="M0 0h512v512H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="M120.998 40.998v37.943C136.22 89.471 146 109.278 146 131.001c0 13.71-3.901 26.65-10.598 36.985c3.465 1.35 7.106 2.85 10.15 4.172l122.352-22.783l5.918 54.842l-111.748 23.219c-.862 16.261-2.45 32.262-5.289 51.566h336.217V40.998zM96 88.998c-16.595 0-32.002 17.747-32.002 42.004S79.405 173.004 96 173.004s32.002-17.745 32.002-42.002S112.595 88.998 96 88.998m156.096 81.629l-108.592 20.22c-14.24-5.602-4.956-3.035-21.469-8.517c-7.476 5.469-16.33 8.672-26.035 8.672c-8.6 0-16.53-2.523-23.428-6.9c-8.59 3.564-17.655 8.09-25.736 12.654c-12.992 7.338-23.722 13.211-27.838 16.033v130.213h20.004V232h17.996v263.002h30.004V326h17.996v169.002h26.004v-171.84l.154-.824c9.514-50.64 12.588-77.384 13.461-109.656l109.56-22.766zm-98.153 126.375c-.952 5.682-1.991 11.64-3.146 17.996H478v-17.996zM208 344.998c-16.595 0-32.002 17.747-32.002 42.004c0 18.198 8.67 32.73 20.01 38.855c3.599-1.662 7.482-2.706 11.68-2.851c4.633-.16 8.98.767 13.052 2.42c10.968-6.352 19.262-20.63 19.262-38.424c0-24.257-15.407-42.004-32.002-42.004m112 0c-16.595 0-32.002 17.747-32.002 42.004c0 18.198 8.67 32.73 20.01 38.855c3.599-1.662 7.482-2.706 11.68-2.851c4.633-.16 8.98.767 13.052 2.42c10.968-6.352 19.262-20.63 19.262-38.424c0-24.257-15.407-42.004-32.002-42.004m112 0c-16.595 0-32.002 17.747-32.002 42.004c0 18.198 8.67 32.73 20.01 38.855c3.599-1.662 7.482-2.706 11.68-2.851c4.633-.16 8.98.767 13.052 2.42c10.968-6.352 19.262-20.63 19.262-38.424c0-24.257-15.407-42.004-32.002-42.004m-223.688 95.996c-3.844.133-8.907 2.93-14.3 8.785s-10.696 14.25-15.125 22.76c-4.226 8.12-7.609 16.16-10.06 22.463h85.339c-3.04-6.436-7.138-14.549-12.133-22.711c-5.298-8.658-11.511-17.138-17.668-22.957s-11.8-8.487-16.053-8.34m112 0c-3.844.133-8.907 2.93-14.3 8.785s-10.696 14.25-15.125 22.76c-4.226 8.12-7.609 16.16-10.06 22.463h85.339c-3.04-6.436-7.138-14.549-12.133-22.711c-5.298-8.658-11.511-17.138-17.668-22.957s-11.8-8.487-16.052-8.34zm112 0c-3.844.133-8.907 2.93-14.3 8.785s-10.696 14.25-15.125 22.76c-4.226 8.12-7.609 16.16-10.06 22.463h85.339c-3.04-6.436-7.138-14.549-12.133-22.711c-5.298-8.658-11.511-17.138-17.668-22.957s-11.8-8.487-16.052-8.34z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Favorite
+                                    Lecturer</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Prof abc</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(231, 84, 15); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="currentColor"
+                                        d="M8.493 20.292q-1.643-.709-2.859-1.924t-1.925-2.856T3 12.003t.709-3.51Q4.417 6.85 5.63 5.634t2.857-1.925T11.997 3t3.51.709q1.643.708 2.859 1.922t1.925 2.857t.709 3.509t-.708 3.51t-1.924 2.859t-2.856 1.925t-3.509.709t-3.51-.708M7.7 12.176L10.698 10L7.7 7.823l-.516.72L9.188 10l-2.002 1.458zm2.8 4.45l1.5-1.5l1.5 1.5l1.5-1.5l.975.975l.627-.627L15 13.873l-1.5 1.5l-1.5-1.5l-1.5 1.5l-1.5-1.5l-1.602 1.602l.627.627l.975-.975zm5.8-4.45l.516-.72L14.814 10l2.001-1.458l-.515-.719L13.302 10z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Most
+                                    Stressful Level</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    300 level</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(15, 231, 184); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5">
+                                        <path stroke-linejoin="round"
+                                            d="M12.5 2.012A10 10 0 0 0 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10c0-.863-.11-1.701-.315-2.5">
+                                        </path>
+                                        <path stroke-linejoin="round"
+                                            d="M8 15a5 5 0 0 0 4 2a5 5 0 0 0 4-2m-6-5.5H8.707c-.453 0-.887.18-1.207.5m6.5-.5h1.293c.453 0 .887.18 1.207.5">
+                                        </path>
+                                        <path
+                                            d="M15.888 2.331c.939-.548 1.758-.327 2.25.025c.202.144.303.216.362.216c.06 0 .16-.072.362-.216c.492-.352 1.311-.573 2.25-.025c1.232.72 1.51 3.094-1.33 5.097c-.542.381-.813.572-1.282.572s-.74-.19-1.281-.572c-2.841-2.003-2.563-4.377-1.33-5.097Z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Class
+                                    Crush</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    None</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(213, 15, 231); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="currentColor" fill-rule="evenodd"
+                                        d="M6.271 2.112c-.81.106-1.238.301-1.544.6c-.305.3-.504.72-.613 1.513C4.002 5.042 4 6.124 4 7.675v8.57a4.2 4.2 0 0 1 1.299-.593c.528-.139 1.144-.139 2.047-.138H20V7.676c0-1.552-.002-2.634-.114-3.451c-.109-.793-.308-1.213-.613-1.513c-.306-.299-.734-.494-1.544-.6c-.834-.11-1.938-.112-3.522-.112H9.793c-1.584 0-2.688.002-3.522.112m.488 4.483c0-.448.37-.811.827-.811h8.828a.82.82 0 0 1 .827.81a.82.82 0 0 1-.827.811H7.586a.82.82 0 0 1-.827-.81m.827 2.973a.82.82 0 0 0-.827.81c0 .448.37.811.827.811h5.517a.82.82 0 0 0 .828-.81a.82.82 0 0 0-.828-.811z"
+                                        clip-rule="evenodd"></path>
+                                    <path fill="currentColor"
+                                        d="M7.473 17.135H20c-.003 1.13-.021 1.974-.113 2.64c-.109.793-.308 1.213-.613 1.513c-.306.299-.734.494-1.544.6c-.834.11-1.938.112-3.522.112H9.793c-1.584 0-2.688-.002-3.522-.111c-.81-.107-1.238-.302-1.544-.601c-.305-.3-.504-.72-.613-1.513c-.041-.3-.068-.637-.084-1.02a2.46 2.46 0 0 1 1.697-1.537c.29-.076.667-.083 1.746-.083">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Other
+                                    Choice of Study?</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Computer Science</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(0, 0, 0); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="#43a1f2"
+                                        d="M9 5a2 2 0 0 1 2 2v6c0 3.13-1.65 5.193-4.757 5.97a1 1 0 1 1-.486-1.94C7.984 16.473 9 15.203 9 13v-1H6a2 2 0 0 1-1.995-1.85L4 10V7a2 2 0 0 1 2-2zm9 0a2 2 0 0 1 2 2v6c0 3.13-1.65 5.193-4.757 5.97a1 1 0 1 1-.486-1.94C16.984 16.473 18 15.203 18 13v-1h-3a2 2 0 0 1-1.995-1.85L13 10V7a2 2 0 0 1 2-2z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Best
+                                    Quote</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Don't be concerned with what was and what will always be.</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(255, 255, 255); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 256 256">
+                                    <path d="M0 0h256v256H0z" fill="none"></path>
+                                    <g fill="none">
+                                        <rect width="256" height="256" fill="url(#a)" rx="60"></rect>
+                                        <rect width="256" height="256" fill="url(#b)" rx="60"></rect>
+                                        <path fill="#fff"
+                                            d="M128.009 28c-27.158 0-30.567.119-41.233.604c-10.646.488-17.913 2.173-24.271 4.646c-6.578 2.554-12.157 5.971-17.715 11.531c-5.563 5.559-8.98 11.138-11.542 17.713c-2.48 6.36-4.167 13.63-4.646 24.271c-.477 10.667-.602 14.077-.602 41.236s.12 30.557.604 41.223c.49 10.646 2.175 17.913 4.646 24.271c2.556 6.578 5.973 12.157 11.533 17.715c5.557 5.563 11.136 8.988 17.709 11.542c6.363 2.473 13.631 4.158 24.275 4.646c10.667.485 14.073.604 41.23.604c27.161 0 30.559-.119 41.225-.604c10.646-.488 17.921-2.173 24.284-4.646c6.575-2.554 12.146-5.979 17.702-11.542c5.563-5.558 8.979-11.137 11.542-17.712c2.458-6.361 4.146-13.63 4.646-24.272c.479-10.666.604-14.066.604-41.225s-.125-30.567-.604-41.234c-.5-10.646-2.188-17.912-4.646-24.27c-2.563-6.578-5.979-12.157-11.542-17.716c-5.562-5.562-11.125-8.979-17.708-11.53c-6.375-2.474-13.646-4.16-24.292-4.647c-10.667-.485-14.063-.604-41.23-.604zm-8.971 18.021c2.663-.004 5.634 0 8.971 0c26.701 0 29.865.096 40.409.575c9.75.446 15.042 2.075 18.567 3.444c4.667 1.812 7.994 3.979 11.492 7.48c3.5 3.5 5.666 6.833 7.483 11.5c1.369 3.52 3 8.812 3.444 18.562c.479 10.542.583 13.708.583 40.396s-.104 29.855-.583 40.396c-.446 9.75-2.075 15.042-3.444 18.563c-1.812 4.667-3.983 7.99-7.483 11.488c-3.5 3.5-6.823 5.666-11.492 7.479c-3.521 1.375-8.817 3-18.567 3.446c-10.542.479-13.708.583-40.409.583c-26.702 0-29.867-.104-40.408-.583c-9.75-.45-15.042-2.079-18.57-3.448c-4.666-1.813-8-3.979-11.5-7.479s-5.666-6.825-7.483-11.494c-1.369-3.521-3-8.813-3.444-18.563c-.479-10.542-.575-13.708-.575-40.413s.096-29.854.575-40.396c.446-9.75 2.075-15.042 3.444-18.567c1.813-4.667 3.983-8 7.484-11.5s6.833-5.667 11.5-7.483c3.525-1.375 8.819-3 18.569-3.448c9.225-.417 12.8-.542 31.437-.563zm62.351 16.604c-6.625 0-12 5.37-12 11.996c0 6.625 5.375 12 12 12s12-5.375 12-12s-5.375-12-12-12zm-53.38 14.021c-28.36 0-51.354 22.994-51.354 51.355s22.994 51.344 51.354 51.344c28.361 0 51.347-22.983 51.347-51.344c0-28.36-22.988-51.355-51.349-51.355zm0 18.021c18.409 0 33.334 14.923 33.334 33.334c0 18.409-14.925 33.334-33.334 33.334s-33.333-14.925-33.333-33.334c0-18.411 14.923-33.334 33.333-33.334">
+                                        </path>
+                                        <defs>
+                                            <radialGradient id="a" cx="0" cy="0" r="1"
+                                                gradientTransform="matrix(0 -253.715 235.975 0 68 275.717)"
+                                                gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#fd5"></stop>
+                                                <stop offset=".1" stop-color="#fd5"></stop>
+                                                <stop offset=".5" stop-color="#ff543e"></stop>
+                                                <stop offset="1" stop-color="#c837ab"></stop>
+                                            </radialGradient>
+                                            <radialGradient id="b" cx="0" cy="0" r="1"
+                                                gradientTransform="rotate(78.68 -32.69 -16.937)scale(113.412 467.488)"
+                                                gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#3771c8"></stop>
+                                                <stop offset=".128" stop-color="#3771c8"></stop>
+                                                <stop offset="1" stop-color="#60f" stop-opacity="0"></stop>
+                                            </radialGradient>
+                                        </defs>
+                                    </g>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Instagram
+                                    Handle</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    @something</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(255, 255, 255); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 24 24">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path fill="#43a1f2"
+                                        d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.2 4.2 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.52 8.52 0 0 1-5.33 1.84q-.51 0-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23">
+                                    </path>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Twitter
+                                    Handle</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    @something</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <span
+                                style="font-size: 14px; line-height: 1; background-color: rgb(116, 15, 231); padding: 3px; border: 1px solid transparent; border-radius: 5px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                    viewBox="0 0 48 48">
+                                    <path d="M0 0h48v48H0z" fill="none"></path>
+                                    <g fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4.667"
+                                            d="M19.036 44q-1.47-4.793-4.435-7.147c-2.965-2.353-7.676-.89-9.416-3.318s1.219-6.892 2.257-9.526s-3.98-3.565-3.394-4.313q.585-.748 7.609-4.316Q13.652 4 26.398 4C39.144 4 44 14.806 44 21.68c0 6.872-5.88 14.276-14.256 15.873q-1.123 1.636 3.24 6.447">
+                                        </path>
+                                        <path stroke-linejoin="round" stroke-width="4"
+                                            d="M19.5 14.5q-.981 3.801.583 5.339q1.563 1.537 5.328 2.01q-.855 4.903 2.083 4.6q2.937-.302 3.53-2.44q4.59 1.29 4.976-2.16c.385-3.45-1.475-6.201-2.238-6.201s-2.738-.093-2.738-1.148s-2.308-1.65-4.391-1.65s-.83-1.405-3.69-.85q-2.86.555-3.443 2.5Z"
+                                            clip-rule="evenodd"></path>
+                                        <path stroke-linecap="round" stroke-width="4"
+                                            d="M30.5 25.5c-1.017.631-2.412 1.68-3 2.5c-1.469 2.05-2.66 3.298-2.92 4.608">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span
+                                    style="font-size: 8px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: yellow;">Skills</span>
+                                <div
+                                    style="width: 100%; font-size: 10px; font-weight: 500; color: green; background: white; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px 0px 14px 0px; padding: 2px 10px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; padding-left: 15px;">
+                                    Skill1, Skills2, Skills3, Skill4</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

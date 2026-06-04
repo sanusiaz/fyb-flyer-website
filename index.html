@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate beautiful FYB (Final Year Brochure) cards for graduating students. Choose a template, fill in your details, and download your personalized card as PNG.">
+    <title>FYB Generator</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>F</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fyb-blue': {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                            500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                            800: '#1e3a5f', 900: '#0f172a'
+                        },
+                        'fyb-yellow': {
+                            300: '#fde68a', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass-header sticky top-0 z-50" id="main-header">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 no-underline" onclick="location.reload(); return false;">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fyb-yellow-400 to-fyb-yellow-600 flex items-center justify-center shadow-lg" style="min-width:40px;">
+                    <span class="text-fyb-blue-800 font-extrabold text-lg">F</span>
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-lg tracking-wide leading-tight">FYB Generator</h1>
+                    <p class="text-blue-300 text-xs leading-tight">Final Year Brochure</p>
+                </div>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="flex items-center gap-3">
+                <!-- GitHub -->
+                <a href="https://github.com/sanusiaz" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-blue-300 hover:text-white text-sm font-medium transition-colors px-3 py-2 rounded-lg hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+
+                <!-- Donate -->
+                <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 text-fyb-blue-800 font-semibold text-sm px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-md"
+                   style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                    Donate
+                </a>
+
+                <!-- Start Over -->
+                <button class="btn-danger text-sm" onclick="App.startOver()" id="start-over-btn" style="display:none;">
+                    Start Over
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-16 md:py-20 px-4 text-center" id="hero-section">
+        <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1920&q=80"
+             alt="" class="hero-image" loading="eager">
+        <div class="hero-overlay"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight drop-shadow-lg">
+                Your Final Year,<br>
+                <span class="text-fyb-yellow-400">Beautifully Captured</span>
+            </h2>
+            <p class="text-blue-100 text-lg md:text-xl max-w-xl mx-auto leading-relaxed drop-shadow-md">
+                Choose a template, fill in your details, upload your photo, and download your
+                professional FYB card.
+            </p>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="max-w-4xl mx-auto px-4" id="progress-wrapper">
+        <div class="progress-container" id="progress-container"></div>
+    </div>
+
+    <!-- Main Step Content -->
+    <main class="max-w-4xl mx-auto px-4 pb-20">
+        <div id="step-container"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-10 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-fyb-yellow-400 to-fyb-yellow-600 flex items-center justify-center">
+                    <span class="text-fyb-blue-800 font-extrabold text-sm">F</span>
+                </div>
+                <span class="font-bold text-lg">FYB Generator</span>
+            </div>
+            <p class="text-blue-300 text-sm">Create beautiful Final Year Brochure cards for your graduating class.</p>
+            <div class="mt-4 flex items-center justify-center gap-5">
+                <a href="https://github.com/sanusiaz" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 text-blue-400 hover:text-white text-sm transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 text-fyb-yellow-400 hover:text-fyb-yellow-300 text-sm transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                    Buy Me a Coffee
+                </a>
+            </div>
+            <p class="text-blue-400/50 text-xs mt-4">&copy; <span id="footer-year"></span> FYB Generator</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/preview.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        (function() {
+            var y = new Date().getFullYear();
+            document.getElementById('footer-year').textContent = y > 2026 ? '2026 - ' + y : '2026';
+        })();
+    </script>
+
+</body>
+</html>

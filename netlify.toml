@@ -1,0 +1,17 @@
+# Netlify Configuration
+[build]
+  publish = "."
+
+# No build command needed - this is a pure static site
+
+# Headers for proper MIME types
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
+
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
