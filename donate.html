@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support FYB Generator</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>F</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fyb-blue': {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                            500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                            800: '#1e3a5f', 900: '#0f172a'
+                        },
+                        'fyb-yellow': {
+                            300: '#fde68a', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .glass-card {
+            background: rgba(30, 58, 95, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-feedback {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: #22c55e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased bg-gradient-to-br from-fyb-blue-900 via-[#111827] to-fyb-blue-900">
+
+    <div class="max-w-xl mx-auto px-4 py-12 w-full flex-grow flex flex-col justify-center">
+
+        <div class="text-center mb-8">
+            <a href="/" class="inline-block mb-4 transition-transform hover:scale-105">
+                <div
+                    class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-fyb-yellow-400 to-fyb-yellow-600 flex items-center justify-center shadow-lg">
+                    <span class="text-fyb-blue-800 p-1 font-extrabold text-2xl"
+                        style="font-family: 'Playfair Display', serif;">F</span>
+                </div>
+            </a>
+            <h1 class="text-3xl md:text-4xl font-bold mb-3 tracking-tight text-white">Support Our Work</h1>
+            <p class="text-blue-200/80 text-sm md:text-base max-w-sm mx-auto">Your donations help keep the FYB Generator
+                free, fast, and constantly improving.</p>
+        </div>
+
+        <div class="glass-card p-6 md:p-8 shadow-2xl relative overflow-hidden">
+            <!-- Decorative blur blobs -->
+            <div
+                class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-[80px] opacity-40">
+            </div>
+            <div
+                class="absolute -bottom-20 -left-20 w-40 h-40 bg-fyb-yellow-500 rounded-full mix-blend-multiply filter blur-[80px] opacity-20">
+            </div>
+
+            <div class="relative z-10">
+                <!-- Tabs -->
+                <div class="flex p-1 bg-fyb-blue-900/50 rounded-lg mb-8 border border-white/5">
+                    <button onclick="switchTab('bank')" id="tab-bank"
+                        class="tab-btn active flex-1 py-2.5 px-4 rounded-md text-sm font-semibold text-blue-200 hover:text-white focus:outline-none">
+                        Bank Account
+                    </button>
+                    <button onclick="switchTab('crypto')" id="tab-crypto"
+                        class="tab-btn flex-1 py-2.5 px-4 rounded-md text-sm font-semibold text-blue-200 hover:text-white focus:outline-none">
+                        Crypto Wallet
+                    </button>
+                </div>
+
+                <!-- Bank Content -->
+                <div id="content-bank" class="block animate-[fadeIn_0.3s_ease-out]">
+                    <div class="bg-[#0b1120]/50 rounded-xl p-5 mb-6 border border-white/5">
+
+                        <!-- Account Details -->
+                        <div class="space-y-5">
+                            <div>
+                                <p class="text-[11px] text-blue-300/70 font-bold tracking-widest uppercase mb-1.5">Bank
+                                    Name</p>
+                                <div
+                                    class="flex justify-between items-center bg-white/5 px-4 py-3 rounded-lg border border-white/10 group">
+                                    <span class="text-lg font-bold text-white tracking-wide" id="bank-name">Opay</span>
+                                    <div class="relative">
+                                        <div class="copy-feedback" id="feedback-bank">Copied!</div>
+                                        <button onclick="copyToClipboard('bank-name', 'feedback-bank')"
+                                            class="text-blue-300 hover:text-white transition-colors p-2 bg-white/5 rounded-md opacity-100 focus:opacity-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-[11px] text-blue-300/70 font-bold tracking-widest uppercase mb-1.5">
+                                    Account Number</p>
+                                <div
+                                    class="flex justify-between items-center bg-white/5 px-4 py-3 rounded-lg border border-white/10 group">
+                                    <span class="text-2xl font-mono font-bold text-fyb-yellow-400 tracking-wider"
+                                        id="bank-acc">7016738135</span>
+                                    <div class="relative">
+                                        <div class="copy-feedback" id="feedback-acc">Copied!</div>
+                                        <button onclick="copyToClipboard('bank-acc', 'feedback-acc')"
+                                            class="text-fyb-yellow-400 hover:text-fyb-yellow-300 transition-colors p-2 bg-white/5 rounded-md opacity-100 focus:opacity-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-[11px] text-blue-300/70 font-bold tracking-widest uppercase mb-1.5">
+                                    Account Name</p>
+                                <div class="px-4 py-2">
+                                    <span class="text-base font-semibold text-white/90 uppercase tracking-wide">Sanusi
+                                        Abdulazeez</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Open Apps Section -->
+                    <div class="mt-8 border-t border-white/10 pt-6">
+                        <p class="text-[11px] text-blue-300/70 font-bold tracking-widest uppercase mb-4 text-center">
+                            Open Banking App</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Opay -->
+                            <button onclick="openApp('opay')"
+                                class="flex items-center justify-center gap-3 bg-[#1bbd36]/10 hover:bg-[#1bbd36]/20 border border-[#1bbd36]/30 text-[#1bbd36] py-3.5 px-4 rounded-xl font-bold transition-all hover:scale-[1.02]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                </svg>
+                                Open OPay
+                            </button>
+                            <!-- Palmpay -->
+                            <button onclick="openApp('palmpay')"
+                                class="flex items-center justify-center gap-3 bg-[#6C3483]/20 hover:bg-[#6C3483]/30 border border-[#6C3483]/40 text-[#d7b5f0] py-3.5 px-4 rounded-xl font-bold transition-all hover:scale-[1.02]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                </svg>
+                                Open PalmPay
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-blue-300/40 mt-4 text-center">Clicking an app will copy the account
+                            number automatically.</p>
+                    </div>
+                </div>
+
+                <!-- Crypto Content -->
+                <div id="content-crypto" class="hidden animate-[fadeIn_0.3s_ease-out]">
+                    <div class="bg-[#0b1120]/50 rounded-xl p-5 border border-white/5">
+
+                        <div class="space-y-6">
+                            <!-- USDT -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-[#26A17B] flex items-center justify-center text-white text-[10px] font-bold">
+                                        ₮</div>
+                                    <p class="text-sm text-blue-200 font-bold uppercase tracking-wide">USDT <span
+                                            class="text-[10px] text-blue-400 font-normal ml-1">(TRC20)</span></p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center bg-white/5 px-4 py-3 rounded-lg border border-white/10 group">
+                                    <span class="text-sm font-mono text-white/90 truncate mr-3"
+                                        id="crypto-usdt">TE3zwWrE1oH7TJXp5KZB8ZpiZYt8d2gzCn</span>
+                                    <div class="relative flex-shrink-0">
+                                        <div class="copy-feedback" id="feedback-usdt">Copied!</div>
+                                        <button onclick="copyToClipboard('crypto-usdt', 'feedback-usdt')"
+                                            class="text-[#26A17B] hover:text-white transition-colors p-2 bg-white/5 rounded-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- USDT (BEP20) -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-[#F3BA2F] flex items-center justify-center text-white text-[10px] font-bold">
+                                        ₮</div>
+                                    <p class="text-sm text-blue-200 font-bold uppercase tracking-wide">USDT <span
+                                            class="text-[10px] text-blue-400 font-normal ml-1">(BEP20)</span></p>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center bg-white/5 px-4 py-3 rounded-lg border border-white/10 group">
+                                    <span class="text-sm font-mono text-white/90 truncate mr-3"
+                                        id="crypto-usdt-bep20">0x761E28604875dbC9224e9E166248abf39f1F65B0</span>
+                                    <div class="relative flex-shrink-0">
+                                        <div class="copy-feedback" id="feedback-usdt-bep20">Copied!</div>
+                                        <button onclick="copyToClipboard('crypto-usdt-bep20', 'feedback-usdt-bep20')"
+                                            class="text-[#F3BA2F] hover:text-white transition-colors p-2 bg-white/5 rounded-md">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const bankBtn = document.getElementById('tab-bank');
+            const cryptoBtn = document.getElementById('tab-crypto');
+            const bankContent = document.getElementById('content-bank');
+            const cryptoContent = document.getElementById('content-crypto');
+
+            if (tab === 'bank') {
+                bankBtn.classList.add('active');
+                cryptoBtn.classList.remove('active');
+                bankContent.classList.remove('hidden');
+                cryptoContent.classList.add('hidden');
+            } else {
+                cryptoBtn.classList.add('active');
+                bankBtn.classList.remove('active');
+                cryptoContent.classList.remove('hidden');
+                bankContent.classList.add('hidden');
+            }
+        }
+
+        async function copyToClipboard(elementId, feedbackId) {
+            const text = document.getElementById(elementId).innerText;
+            try {
+                await navigator.clipboard.writeText(text);
+                showFeedback(feedbackId);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showFeedback(feedbackId);
+                } catch (e) {
+                    console.error('Fallback failed', e);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showFeedback(feedbackId) {
+            const feedbackEl = document.getElementById(feedbackId);
+            if (feedbackEl) {
+                feedbackEl.classList.add('show');
+                setTimeout(() => {
+                    feedbackEl.classList.remove('show');
+                }, 2000);
+            }
+        }
+
+        async function openApp(appName) {
+            // Copy Account Number specifically
+            const accNum = document.getElementById('bank-acc').innerText;
+            try {
+                await navigator.clipboard.writeText(accNum);
+                showFeedback('feedback-acc');
+            } catch (err) {
+                console.error('Copy failed');
+            }
+
+            // Provide a small delay before attempting redirect to allow clipboard confirmation visually
+            setTimeout(() => {
+                if (appName === 'opay') {
+                    // Try to launch OPay deep link
+                    window.location.href = 'opay://';
+                    // Fallback after 2.5s if not installed
+                    setTimeout(() => {
+                        window.location.href = 'https://opayweb.com/';
+                    }, 2500);
+                } else if (appName === 'palmpay') {
+                    // Try to launch PalmPay deep link
+                    window.location.href = 'palmpay://';
+                    // Fallback
+                    setTimeout(() => {
+                        window.location.href = 'https://www.palmpay.com/';
+                    }, 2500);
+                }
+            }, 400);
+        }
+    </script>
+</body>
+
+</html>
