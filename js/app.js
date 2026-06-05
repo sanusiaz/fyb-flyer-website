@@ -31,10 +31,10 @@ const STEPS = [
         label: 'School',
         fields: [
             { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Political Science and International Studies', required: true },
-            { name: 'organization', label: 'Organization / Group Name', type: 'text', placeholder: 'e.g., The Illuminators', required: true },
-            { name: 'orgFullName', label: 'Organization Full Name', type: 'text', placeholder: 'e.g., African Society of International Studies', required: true },
+            { name: 'organization', label: 'Group Name', type: 'text', placeholder: 'e.g., The Illuminators', required: true },
+            { name: 'orgFullName', label: 'Organization Name', type: 'text', placeholder: 'e.g., African Society of International Studies', required: true },
             { name: 'orgAcronym', label: 'Organization Acronym', type: 'text', placeholder: 'e.g., ASIS', required: true },
-            { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., International Affairs', required: true },
+            { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., International Affairs', required: false },
             { name: 'gradYear', label: 'Graduation Year', type: 'text', placeholder: 'e.g., 25', required: true }
         ]
     },
@@ -49,7 +49,7 @@ const STEPS = [
             { name: 'favoriteLecturer', label: 'Favorite Lecturer', type: 'text', placeholder: 'e.g., Dr. Smith', required: true },
             { name: 'stressfulLevel', label: 'Most Stressful Level', type: 'text', placeholder: 'e.g., 300L', required: true },
             { name: 'classPals', label: 'Class Pals', type: 'text', placeholder: 'e.g., Jane and Alex', required: true },
-            { name: 'classCrush', label: 'Class Crush', type: 'text', placeholder: 'e.g., Someone Special', required: true },
+            { name: 'classCrush', label: 'Class Crush', type: 'text', placeholder: 'e.g., Someone Special', required: false },
             { name: 'relationshipStatus', label: 'Relationship Status', type: 'text', placeholder: 'e.g., Single', required: true }
         ]
     },
@@ -61,8 +61,8 @@ const STEPS = [
         fields: [
             { name: 'ifNotDept', label: 'If Not Your Department, What Else?', type: 'text', placeholder: 'e.g., International Studies', required: true },
             { name: 'bestQuote', label: 'Best Quote', type: 'textarea', placeholder: 'e.g., Extra sheets? Never heard of her!', required: true },
-            { name: 'instagram', label: 'Instagram Handle', type: 'text', placeholder: 'e.g., @johndoe', required: true },
-            { name: 'twitter', label: 'Twitter Handle', type: 'text', placeholder: 'e.g., @johndoe', required: true },
+            { name: 'instagram', label: 'Instagram Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
+            { name: 'twitter', label: 'Twitter Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
             { name: 'skills', label: 'Skills', type: 'text', placeholder: 'e.g., Advanced Computer Proficiency', required: true }
         ]
     },
@@ -244,11 +244,9 @@ const App = {
                 </div>
             </div>
             <!-- Template Preview Modal -->
-            <button id="close_preview_button" onclick="App.closePreviewModal()" style="position:absolute; top: -20px; left: calc(50% - 40px/2); float:right; background: #ef4444; color: white; border:none; border-radius: 50%; width:40px; height:40px; font-size:20px; cursor:pointer; z-index:101; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">X</button>
-            <div id="template-preview-modal" style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); overflow-y:auto; padding: 2rem;">
-                <div style="width: max-content; overflow-y: auto; margin: 0 auto; position: relative;">
-                    <div id="template-preview-content" style="background: transparent; border-radius: 12px; overflow: hidden;"></div>
-                </div>
+            <div id="template-preview-modal" onclick="App.closePreviewModal()" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(15, 23, 42, 0.9); backdrop-filter:blur(8px); padding: 2rem; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;">
+                <button onclick="App.closePreviewModal()" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; z-index: 1001; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">&#10005;</button>
+                <div id="template-preview-content" onclick="event.stopPropagation()" style="max-width: 100%; max-height: 100%; display: flex; justify-content: center; align-items: center; cursor: default;"></div>
             </div>
         `;
     },
@@ -268,36 +266,16 @@ const App = {
         const content = document.getElementById('template-preview-content');
         if (!modal || !content) return;
 
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
         content.innerHTML = '<div style="text-align:center; padding: 3rem;"><div class="spinner"></div><p style="color:white; margin-top:1rem;">Loading preview...</p></div>';
 
         try {
-
-            let close_preview_button = document.getElementById('close_preview_button');
-            if (close_preview_button) close_preview_button.style.display = 'block';
-
             const tmpl = await TemplateManager.getTemplateById(templateId);
             if (!tmpl) { content.innerHTML = '<p style="color:#ef4444; text-align:center;">Template not found.</p>'; return; }
-            let html = await TemplateManager.loadTemplateHTML(tmpl.file);
-            if (!html) { content.innerHTML = '<p style="color:#ef4444; text-align:center;">Failed to load template.</p>'; return; }
 
-            // Inject sample/placeholder data
-            const sampleData = {
-                surname: 'DOE', firstName: 'John', middleName: 'James', nickName: 'JD',
-                department: 'Computer Science', university: 'Ahmadu Bello University',
-                organization: 'Pioneers', orgFullName: 'Student Association of Computing', orgAcronym: 'SAC',
-                dob: '1st January', hobbies: 'Reading, Sports', classPals: 'Jane and Alex',
-                specialization: 'Software Engineering', relationshipStatus: 'Single', favoriteCourse: 'CSC 301',
-                favoriteLecturer: 'Dr. Smith', stressfulLevel: '300L', classCrush: 'Someone Special',
-                ifNotDept: 'Electrical Engineering', bestQuote: 'The best way to predict the future is to create it',
-                twitter: '@your_handle', instagram: '@your_handle', skills: 'Your Skills', gradYear: '25'
-            };
-
-            // Use a gray placeholder for photo and default logo
-            const placeholderImg = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400"><rect fill="%23cbd5e1" width="300" height="400" rx="12"/><circle cx="150" cy="140" r="50" fill="%2394a3b8"/><ellipse cx="150" cy="280" rx="80" ry="60" fill="%2394a3b8"/><text x="150" y="370" text-anchor="middle" fill="%2364748b" font-family="sans-serif" font-size="14">Your Photo</text></svg>');
-            html = TemplateManager.injectData(html, sampleData, placeholderImg, this.getEffectiveLogo());
-
-            content.innerHTML = '<div style="display:flex; justify-content:center; padding: 1rem 0;">' + html + '</div>';
+            content.innerHTML = `
+                <img src="${tmpl.screenshot}" alt="${tmpl.name} Preview" style="max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+            `;
         } catch (err) {
             console.error('Preview error:', err);
             content.innerHTML = '<p style="color:#ef4444; text-align:center;">Preview failed.</p>';
@@ -314,14 +292,22 @@ const App = {
     // ── Steps 1-4: Form Steps ─────────────────
     renderFormStep(stepConfig) {
         let fieldsHtml = '';
+        const isTemplate1 = this.selectedTemplateId === 'template_1';
+        const optionalFieldsT1 = ['specialization', 'instagram', 'twitter', 'classCrush'];
+
         stepConfig.fields.forEach(field => {
+            let isRequired = field.required;
+            if (isTemplate1 && optionalFieldsT1.includes(field.name)) {
+                isRequired = false;
+            }
+
             const tag = field.type === 'textarea'
-                ? `<textarea class="form-input" id="field-${field.name}" name="${field.name}" placeholder="${field.placeholder}" ${field.required ? 'required' : ''}></textarea>`
-                : `<input class="form-input" type="text" id="field-${field.name}" name="${field.name}" placeholder="${field.placeholder}" ${field.required ? 'required' : ''}>`;
+                ? `<textarea class="form-input" id="field-${field.name}" name="${field.name}" placeholder="${field.placeholder}" ${isRequired ? 'required' : ''}></textarea>`
+                : `<input class="form-input" type="text" id="field-${field.name}" name="${field.name}" placeholder="${field.placeholder}" ${isRequired ? 'required' : ''}>`;
             fieldsHtml += `
                 <div class="form-group">
                     <label class="form-label" for="field-${field.name}">
-                        ${field.label} ${field.required
+                        ${field.label} ${isRequired
                     ? '<span style="color: #ef4444;">*</span>'
                     : '<span style="color: var(--gray-400); font-weight: 400; text-transform: none;">(optional)</span>'}
                     </label>
@@ -339,7 +325,11 @@ const App = {
                 <form id="step-form" onsubmit="return false;">${fieldsHtml}</form>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-100);">
                     <button class="btn-secondary" onclick="App.prevStep()">Back</button>
-                    <button class="btn-primary" onclick="App.nextStep()">${isLastFormStep ? 'Continue' : 'Next'}</button>
+
+                    <div class="flex gap-2 align-middle">
+                        <button class="btn-danger" onclick="App.startOver()">Start Over</button>
+                        <button class="btn-primary" onclick="App.nextStep()">${isLastFormStep ? 'Continue' : 'Next'}</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -572,7 +562,7 @@ const App = {
         if (!step.fields) return true;
         let valid = true; let firstBad = null;
 
-        const isTemplate1 = this.selectedTemplateId === 'template-1';
+        const isTemplate1 = this.selectedTemplateId === 'template_1';
         const optionalFieldsT1 = ['specialization', 'instagram', 'twitter', 'classCrush'];
 
         step.fields.forEach(f => {
@@ -655,10 +645,39 @@ const App = {
             let html = await TemplateManager.loadTemplateHTML(tmpl.file);
             if (!html) { loading.innerHTML = '<p style="color:#ef4444;">Failed to load template file.</p>'; return; }
 
-            html = TemplateManager.injectData(html, this.formData, this.userImage, this.getEffectiveLogo(), this.departmentLogo);
+            let dataToInject = { ...this.formData };
+            if (this.selectedTemplateId === 'template_1') {
+                if (!dataToInject.classCrush || dataToInject.classCrush.trim() === '') {
+                    dataToInject.classCrush = 'None';
+                }
+                if (!dataToInject.specialization || dataToInject.specialization.trim() === '') {
+                    dataToInject.specialization = 'None';
+                }
+            }
+
+            html = TemplateManager.injectData(html, dataToInject, this.userImage, this.getEffectiveLogo(), this.departmentLogo);
 
             const area = document.getElementById('template-render-area');
             area.innerHTML = html;
+
+            if (this.selectedTemplateId === 'template_1') {
+                const specSec = area.querySelector('#section-specialization');
+                if (specSec && (!this.formData.specialization || this.formData.specialization.trim() === '')) {
+                    specSec.remove();
+                }
+                const igSec = area.querySelector('#section-instagram');
+                if (igSec && (!this.formData.instagram || this.formData.instagram.trim() === '')) {
+                    igSec.remove();
+                }
+                const twSec = area.querySelector('#section-twitter');
+                if (twSec && (!this.formData.twitter || this.formData.twitter.trim() === '')) {
+                    twSec.remove();
+                }
+                const deptSec = area.querySelector('#section-dept-logo');
+                if (deptSec && !this.departmentLogo) {
+                    deptSec.remove();
+                }
+            }
             await document.fonts.ready;
             await new Promise(r => setTimeout(r, 1500));
             const el = area.querySelector('#fyb-template') || area.firstElementChild;
@@ -699,6 +718,9 @@ const App = {
         Storage.saveFormData({ university: DEFAULT_UNIVERSITY });
         if (this.defaultLogoBase64) this.universityLogo = this.defaultLogoBase64;
         this.renderStep(0);
+
+        let close_preview_button = document.getElementById('close_preview_button');
+        if (close_preview_button) close_preview_button.style.display = 'none';
     },
 
     showToast(message, type) {
