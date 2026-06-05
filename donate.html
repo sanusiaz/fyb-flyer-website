@@ -352,7 +352,7 @@
         }
 
         async function openApp(appName) {
-            // Copy Account Number specifically
+            // Copy account number
             const accNum = document.getElementById('bank-acc').innerText;
             try {
                 await navigator.clipboard.writeText(accNum);
@@ -361,22 +361,29 @@
                 console.error('Copy failed');
             }
 
-            // Provide a small delay before attempting redirect to allow clipboard confirmation visually
+            const apps = {
+                opay: {
+                    androidIntent: 'intent://pay/#Intent;scheme=opay;package=team.opay.pay;end',
+                    fallback: 'https://opayweb.com/'
+                },
+                palmpay: {
+                    androidIntent: 'intent://home/#Intent;scheme=palmpay;package=com.palmpay.pay;end',
+                    fallback: 'https://www.palmpay.com/'
+                }
+            };
+
+            const app = apps[appName];
+            if (!app) return;
+
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
             setTimeout(() => {
-                if (appName === 'opay') {
-                    // Try to launch OPay deep link
-                    window.location.href = 'opay://';
-                    // Fallback after 2.5s if not installed
-                    // setTimeout(() => {
-                    //     window.location.href = 'https://opayweb.com/';
-                    // }, 2500);
-                } else if (appName === 'palmpay') {
-                    // Try to launch PalmPay deep link
-                    window.location.href = 'palmpay://';
-                    // Fallback
-                    // setTimeout(() => {
-                    //     window.location.href = 'https://www.palmpay.com/';
-                    // }, 2500);
+                if (isAndroid) {
+                    // Android intent URLs are far more reliable
+                    window.location.href = app.androidIntent;
+                } else {
+                    // iOS or desktop — fall back to web
+                    window.location.href = app.fallback;
                 }
             }, 400);
         }
