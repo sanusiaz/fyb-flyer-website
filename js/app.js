@@ -4,68 +4,18 @@
 // persistence and template preview/download
 // ============================================
 
-const STEPS = [
+let STEPS = [];
+
+const COMMON_STEPS_START = [
     {
         id: 'template-select',
         title: 'Choose Your Template',
-        subtitle: 'Select a design for your FYB card',
+        subtitle: 'Click to Select a design for your FYB card',
         label: 'Template'
-    },
-    {
-        id: 'personal-details',
-        title: 'Personal Details',
-        subtitle: 'Start with your basic information',
-        label: 'Personal',
-        fields: [
-            { name: 'surname', label: 'Surname', type: 'text', placeholder: 'e.g., DOE', required: true },
-            { name: 'firstName', label: 'First Name', type: 'text', placeholder: 'e.g., John', required: true },
-            { name: 'middleName', label: 'Middle Name', type: 'text', placeholder: 'e.g., James', required: false },
-            { name: 'nickName', label: 'Nick Name', type: 'text', placeholder: 'e.g., JD', required: true },
-            { name: 'dob', label: 'Date of Birth', type: 'text', placeholder: 'e.g., 15th September', required: true }
-        ]
-    },
-    {
-        id: 'school-info',
-        title: 'School & Organization',
-        subtitle: 'Your academic details',
-        label: 'School',
-        fields: [
-            { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Political Science and International Studies', required: true },
-            { name: 'organization', label: 'Group Name', type: 'text', placeholder: 'e.g., The Illuminators', required: true },
-            { name: 'orgFullName', label: 'Organization Name', type: 'text', placeholder: 'e.g., African Society of International Studies', required: true },
-            { name: 'orgAcronym', label: 'Organization Acronym', type: 'text', placeholder: 'e.g., ASIS', required: true },
-            { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., International Affairs', required: false },
-            { name: 'gradYear', label: 'Graduation Year', type: 'text', placeholder: 'e.g., 25', required: true }
-        ]
-    },
-    {
-        id: 'favorites',
-        title: 'Favorites & Fun',
-        subtitle: 'The fun stuff about you',
-        label: 'Favorites',
-        fields: [
-            { name: 'hobbies', label: 'Hobbies', type: 'text', placeholder: 'e.g., Watching Movies, Dancing', required: true },
-            { name: 'favoriteCourse', label: 'Favorite Course', type: 'text', placeholder: 'e.g., INTS 403', required: true },
-            { name: 'favoriteLecturer', label: 'Favorite Lecturer', type: 'text', placeholder: 'e.g., Dr. Smith', required: true },
-            { name: 'stressfulLevel', label: 'Most Stressful Level', type: 'text', placeholder: 'e.g., 300L', required: true },
-            { name: 'classPals', label: 'Class Pals', type: 'text', placeholder: 'e.g., Jane and Alex', required: true },
-            { name: 'classCrush', label: 'Class Crush', type: 'text', placeholder: 'e.g., Someone Special', required: false },
-            { name: 'relationshipStatus', label: 'Relationship Status', type: 'text', placeholder: 'e.g., Single', required: true }
-        ]
-    },
-    {
-        id: 'extras',
-        title: 'Extra Details',
-        subtitle: 'A few more things to complete your profile',
-        label: 'Extras',
-        fields: [
-            { name: 'ifNotDept', label: 'If Not Your Department, What Else?', type: 'text', placeholder: 'e.g., International Studies', required: true },
-            { name: 'bestQuote', label: 'Best Quote', type: 'textarea', placeholder: 'e.g., Extra sheets? Never heard of her!', required: true },
-            { name: 'instagram', label: 'Instagram Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
-            { name: 'twitter', label: 'Twitter Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
-            { name: 'skills', label: 'Skills', type: 'text', placeholder: 'e.g., Advanced Computer Proficiency', required: true }
-        ]
-    },
+    }
+];
+
+const COMMON_STEPS_END = [
     {
         id: 'university-info',
         title: 'University',
@@ -85,6 +35,173 @@ const STEPS = [
         label: 'Download'
     }
 ];
+
+const TEMPLATE_FORMS = {
+    'template_1': [
+        {
+            id: 'personal-details',
+            title: 'Personal Details',
+            subtitle: 'Start with your basic information',
+            label: 'Personal',
+            fields: [
+                { name: 'surname', label: 'Surname', type: 'text', placeholder: 'e.g., DOE', required: true },
+                { name: 'firstName', label: 'First Name', type: 'text', placeholder: 'e.g., John', required: true },
+                { name: 'middleName', label: 'Middle Name', type: 'text', placeholder: 'e.g., James', required: false },
+                { name: 'nickName', label: 'Nick Name', type: 'text', placeholder: 'e.g., JD', required: true },
+                { name: 'dob', label: 'Date of Birth', type: 'text', placeholder: 'e.g., 15th September', required: true }
+            ]
+        },
+        {
+            id: 'school-info',
+            title: 'School & Organization',
+            subtitle: 'Your academic details',
+            label: 'School',
+            fields: [
+                { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Political Science and International Studies', required: true },
+                { name: 'organization', label: 'Group Name', type: 'text', placeholder: 'e.g., The Illuminators', required: true },
+                { name: 'orgFullName', label: 'Organization Name', type: 'text', placeholder: 'e.g., African Society of International Studies', required: true },
+                { name: 'orgAcronym', label: 'Organization Acronym', type: 'text', placeholder: 'e.g., ASIS', required: true },
+                { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., International Affairs', required: false },
+                { name: 'gradYear', label: 'Graduation Year', type: 'text', placeholder: 'e.g., 25', required: true }
+            ]
+        },
+        {
+            id: 'favorites',
+            title: 'Favorites & Fun',
+            subtitle: 'The fun stuff about you',
+            label: 'Favorites',
+            fields: [
+                { name: 'hobbies', label: 'Hobbies', type: 'text', placeholder: 'e.g., Watching Movies, Dancing', required: true },
+                { name: 'favoriteCourse', label: 'Favorite Course', type: 'text', placeholder: 'e.g., INTS 403', required: true },
+                { name: 'favoriteLecturer', label: 'Favorite Lecturer', type: 'text', placeholder: 'e.g., Dr. Smith', required: true },
+                { name: 'stressfulLevel', label: 'Most Stressful Level', type: 'text', placeholder: 'e.g., 300L', required: true },
+                { name: 'classPals', label: 'Class Pals', type: 'text', placeholder: 'e.g., Jane and Alex', required: true },
+                { name: 'classCrush', label: 'Class Crush', type: 'text', placeholder: 'e.g., Someone Special', required: false },
+                { name: 'relationshipStatus', label: 'Relationship Status', type: 'text', placeholder: 'e.g., Single', required: true }
+            ]
+        },
+        {
+            id: 'extras',
+            title: 'Extra Details',
+            subtitle: 'A few more things to complete your profile',
+            label: 'Extras',
+            fields: [
+                { name: 'ifNotDept', label: 'If Not Your Department, What Else?', type: 'text', placeholder: 'e.g., International Studies', required: true },
+                { name: 'bestQuote', label: 'Best Quote', type: 'textarea', placeholder: 'e.g., Extra sheets? Never heard of her!', required: true },
+                { name: 'instagram', label: 'Instagram Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
+                { name: 'twitter', label: 'Twitter Handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
+                { name: 'skills', label: 'Skills', type: 'text', placeholder: 'e.g., Advanced Computer Proficiency', required: true }
+            ]
+        }
+    ],
+    'template_2': [
+        {
+            id: 't2-personal-details',
+            title: 'Personal Details',
+            subtitle: 'Start with your basic information',
+            label: 'Personal',
+            fields: [
+                { name: 'firstName', label: 'First name', type: 'text', placeholder: 'e.g., John', required: true },
+                { name: 'surname', label: 'Last name', type: 'text', placeholder: 'e.g., Doe', required: true },
+                { name: 'middleName', label: 'Middle name', type: 'text', placeholder: 'e.g., Smith', required: false },
+                { name: 'nickName', label: 'Nick name', type: 'text', placeholder: 'e.g., JD', required: true },
+                { name: 'tribe', label: 'Tribe', type: 'text', placeholder: 'e.g., Yoruba', required: true },
+                { name: 'stateOrigin', label: 'State of origin', type: 'text', placeholder: 'e.g., Lagos', required: true },
+                { name: 'dob', label: 'Date of birth without the year', type: 'text', placeholder: 'e.g., 14th July', required: true },
+                { name: 'relationshipStatus', label: 'Relationship Status', type: 'text', placeholder: 'e.g., Single', required: true }
+            ]
+        },
+        {
+            id: 't2-school-info',
+            title: 'Academic Details',
+            subtitle: 'Your academic information',
+            label: 'Academic',
+            fields: [
+                { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Automotive Engineering', required: true },
+                { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., Vehicle Design', required: true },
+                { name: 'gradYear', label: 'Graduation Year (e.g. 24)', type: 'text', placeholder: 'e.g., 24', required: true },
+                { name: 'positionHeld', label: 'Position you held in the university', type: 'text', placeholder: 'e.g., President', required: false },
+                { name: 'orgFullName', label: 'Organization name (For the position held in the school)', type: 'text', placeholder: 'e.g., AES', required: false }
+            ]
+        },
+        {
+            id: 't2-favorites',
+            title: 'Favorites & Experiences',
+            subtitle: 'Tell us about your likes and dislikes',
+            label: 'Favorites',
+            fields: [
+                { name: 'stressfulLevel', label: 'Most stressful level', type: 'text', placeholder: 'e.g., 400 Level', required: true },
+                { name: 'worstCourse', label: 'Most stressful course', type: 'text', placeholder: 'e.g., AUTO 401', required: true },
+                { name: 'favoriteCourse', label: 'Favorite course', type: 'text', placeholder: 'e.g., AUTO 501', required: true },
+                { name: 'favoriteLecturer', label: 'Favorite lecturer', type: 'text', placeholder: 'e.g., Dr. Smith', required: true },
+                { name: 'ifNotDept', label: 'If not automotive, what else?', type: 'text', placeholder: 'e.g., Mechanical Engineering', required: true },
+                { name: 'ifNotSchool', label: 'If not school, what else?', type: 'text', placeholder: 'e.g., Business', required: true }
+            ]
+        },
+        {
+            id: 't2-extras',
+            title: 'Extra Details',
+            subtitle: 'A few more things to complete your profile',
+            label: 'Extras',
+            fields: [
+                { name: 'hobbies', label: 'Hobbies', type: 'text', placeholder: 'e.g., Football, Reading', required: true },
+                { name: 'skills', label: 'Skills', type: 'text', placeholder: 'e.g., CAD Design, Programming', required: true },
+                { name: 'classPals', label: 'Class Pals/Buddies', type: 'text', placeholder: 'e.g., John, Jane', required: false },
+                { name: 'frequentWord', label: 'Most frequent word you use often. i.e ( school na scam )', type: 'text', placeholder: 'e.g., It is what it is', required: true },
+                { name: 'bestQuote', label: 'Best quote', type: 'textarea', placeholder: 'e.g., Life is beautiful', required: true },
+                { name: 'instagram', label: 'Instagram handle', type: 'text', placeholder: 'e.g., @johndoe', required: false },
+                { name: 'twitter', label: 'Twitter handle', type: 'text', placeholder: 'e.g., @johndoe', required: false }
+            ]
+        }
+    ],
+    'template_3': [
+        {
+            id: 't3-personal-details',
+            title: 'Personal Details',
+            subtitle: 'Start with your basic information',
+            label: 'Personal',
+            fields: [
+                { name: 'surname', label: 'Surname', type: 'text', placeholder: 'e.g., ABDULMUMINI', required: true },
+                { name: 'firstName', label: 'First Name', type: 'text', placeholder: 'e.g., MARIAM', required: true },
+                { name: 'middleName', label: 'Middle Name', type: 'text', placeholder: 'e.g., TOSIN', required: false },
+                { name: 'nickName', label: 'Nick Name (A.K.A)', type: 'text', placeholder: 'e.g., BOMA', required: true },
+                { name: 'dob', label: 'Date of Birth', type: 'text', placeholder: 'e.g., 2nd November', required: true },
+                { name: 'tribe', label: 'Tribe', type: 'text', placeholder: 'e.g., Yoruba', required: true },
+                { name: 'stateOrigin', label: 'State of Origin', type: 'text', placeholder: 'e.g., Kwara State', required: true },
+                { name: 'relationshipStatus', label: 'Relationship Status', type: 'text', placeholder: 'e.g., Dating', required: true }
+            ]
+        },
+        {
+            id: 't3-school-info',
+            title: 'School & Organization',
+            subtitle: 'Your academic details',
+            label: 'School',
+            fields: [
+                { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Department of Food Science and Technology', required: true },
+                { name: 'orgFullName', label: 'Class / Group Name', type: 'text', placeholder: 'e.g., The Epicurean Class of 2026', required: true },
+                { name: 'favoriteLecturer', label: 'Favorite Lecturer', type: 'text', placeholder: 'e.g., Mr Bash', required: true },
+                { name: 'favoriteLevel', label: 'Favorite Level', type: 'text', placeholder: 'e.g., 400 Level', required: true },
+                { name: 'toughestLevel', label: 'Toughest Level', type: 'text', placeholder: 'e.g., None', required: false },
+                { name: 'ifNotDept', label: 'If Not Your Department?', type: 'text', placeholder: 'e.g., Nursing', required: true }
+            ]
+        },
+        {
+            id: 't3-favorites',
+            title: 'Favorites & Personality',
+            subtitle: 'Tell us about your likes and dislikes',
+            label: 'Personality',
+            fields: [
+                { name: 'hobbies', label: 'Hobbies', type: 'text', placeholder: 'e.g., Watching Movies', required: true },
+                { name: 'bestClassBuddies', label: 'Best Class Buddies', type: 'text', placeholder: 'e.g., Everyone', required: true },
+                { name: 'bestQuote', label: 'Favorite Quote', type: 'textarea', placeholder: 'e.g., Kindness is never wasted.', required: true },
+                { name: 'socialMedia', label: 'Social Media Handles', type: 'text', placeholder: 'e.g., @bomas32', required: false }
+            ]
+        }
+    ]
+};
+
+// Initialize with a default structure
+STEPS = [...COMMON_STEPS_START, ...TEMPLATE_FORMS['template_1'], ...COMMON_STEPS_END];
 
 const DEFAULT_UNIVERSITY = 'Ahmadu Bello University';
 const DEFAULT_LOGO_PATH = 'logos/schools/abu.png';
@@ -108,6 +225,11 @@ const App = {
         this.departmentLogo = Storage.loadDepartmentLogo();
         this.selectedTemplateId = Storage.getSelectedTemplate();
         this.templates = await TemplateManager.loadManifest();
+
+        if (this.selectedTemplateId) {
+            const forms = TEMPLATE_FORMS[this.selectedTemplateId] || TEMPLATE_FORMS['template_1'];
+            STEPS = [...COMMON_STEPS_START, ...forms, ...COMMON_STEPS_END];
+        }
 
         // Set default university name if not set
         if (!this.formData.university) {
@@ -176,24 +298,26 @@ const App = {
         container.innerHTML = html;
     },
 
-    renderStep(step) {
+    renderStep(stepIndex) {
         const container = document.getElementById('step-container');
         if (!container) return;
-        Storage.saveCurrentStep(step);
+        Storage.saveCurrentStep(stepIndex);
         let html = '';
-        switch (step) {
-            case 0: html = this.renderTemplateSelection(); break;
-            case 1: case 2: case 3: case 4: html = this.renderFormStep(STEPS[step]); break;
-            case 5: html = this.renderUniversityStep(); break;
-            case 6: html = this.renderPhotoUpload(); break;
-            case 7: html = this.renderPreviewStep(); break;
-        }
+        const stepDef = STEPS[stepIndex];
+
+        if (stepDef.id === 'template-select') html = this.renderTemplateSelection();
+        else if (stepDef.id === 'university-info') html = this.renderUniversityStep();
+        else if (stepDef.id === 'photo-upload') html = this.renderPhotoUpload();
+        else if (stepDef.id === 'preview') html = this.renderPreviewStep();
+        else html = this.renderFormStep(stepDef);
+
         container.innerHTML = html;
         container.className = 'step-enter';
-        if (step >= 1 && step <= 4) { this.restoreFormValues(); this.attachFormListeners(); }
-        if (step === 5) this.setupUniversityStep();
-        if (step === 6) this.attachPhotoListeners();
-        if (step === 7) this.loadPreview();
+        if (stepDef.fields) { this.restoreFormValues(); this.attachFormListeners(); }
+        if (stepDef.id === 'university-info') this.setupUniversityStep();
+        if (stepDef.id === 'photo-upload') this.attachPhotoListeners();
+        if (stepDef.id === 'preview') this.loadPreview();
+
         this.renderProgressBar();
         this.updateHeaderUI();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -254,6 +378,11 @@ const App = {
     selectTemplate(templateId) {
         this.selectedTemplateId = templateId;
         Storage.saveSelectedTemplate(templateId);
+
+        // Dynamically rebuild the STEPS array for this template
+        const forms = TEMPLATE_FORMS[templateId] || TEMPLATE_FORMS['template_1'];
+        STEPS = [...COMMON_STEPS_START, ...forms, ...COMMON_STEPS_END];
+
         document.querySelectorAll('.template-card').forEach(card => {
             card.classList.toggle('selected', card.dataset.templateId === templateId);
         });
@@ -315,7 +444,8 @@ const App = {
                 </div>
             `;
         });
-        const isLastFormStep = this.currentStep === 4;
+
+        const isLastFormStep = STEPS[this.currentStep + 1] && STEPS[this.currentStep + 1].id === 'university-info';
         return `
             <div class="card" style="max-width: 620px; margin: 0 auto;">
                 <div style="text-align: center; margin-bottom: 2rem;">
@@ -521,14 +651,16 @@ const App = {
 
     // ── Navigation ────────────────────────────
     nextStep() {
-        if (this.currentStep === 0 && !this.selectedTemplateId) {
+        const currentStepDef = STEPS[this.currentStep];
+
+        if (currentStepDef.id === 'template-select' && !this.selectedTemplateId) {
             this.showToast('Please select a template first.', 'warning'); return;
         }
-        if (this.currentStep >= 1 && this.currentStep <= 4) {
+        if (currentStepDef.fields) {
             if (!this.validateCurrentStep()) return;
             this.saveCurrentFormData();
         }
-        if (this.currentStep === 5) {
+        if (currentStepDef.id === 'university-info') {
             // Save university name from field
             const uniField = document.getElementById('field-university');
             if (uniField) {
@@ -536,7 +668,7 @@ const App = {
                 Storage.saveFormData({ university: this.formData.university });
             }
         }
-        if (this.currentStep === 6 && !this.userImage) {
+        if (currentStepDef.id === 'photo-upload' && !this.userImage) {
             this.showToast('Please upload your photo first.', 'warning'); return;
         }
         if (this.currentStep < STEPS.length - 1) {
@@ -546,8 +678,10 @@ const App = {
     },
 
     prevStep() {
-        if (this.currentStep >= 1 && this.currentStep <= 4) this.saveCurrentFormData();
-        if (this.currentStep === 5) {
+        const currentStepDef = STEPS[this.currentStep];
+
+        if (currentStepDef.fields) this.saveCurrentFormData();
+        if (currentStepDef.id === 'university-info') {
             const uniField = document.getElementById('field-university');
             if (uniField) {
                 this.formData.university = uniField.value.trim() || DEFAULT_UNIVERSITY;
@@ -653,6 +787,35 @@ const App = {
                 if (!dataToInject.specialization || dataToInject.specialization.trim() === '') {
                     dataToInject.specialization = 'None';
                 }
+            } else if (this.selectedTemplateId === 'template_2') {
+                const optionalFieldsT2 = ['middleName', 'positionHeld', 'orgFullName', 'classPals', 'instagram', 'twitter'];
+                optionalFieldsT2.forEach(field => {
+                    if (!dataToInject[field] || dataToInject[field].trim() === '') {
+                        dataToInject[field] = 'None';
+                    }
+                });
+                
+                // Hide middleName if missing instead of showing 'None'
+                if (!dataToInject.middleName || dataToInject.middleName.trim() === 'None') {
+                    dataToInject.middleName = ''; // will be empty in stacked text
+                }
+            } else if (this.selectedTemplateId === 'template_3') {
+                const optionalFieldsT3 = ['toughestLevel'];
+                optionalFieldsT3.forEach(field => {
+                    if (!dataToInject[field] || dataToInject[field].trim() === '') {
+                        dataToInject[field] = 'None';
+                    }
+                });
+
+                // Hide middleName if missing instead of showing 'None'
+                if (!dataToInject.middleName || dataToInject.middleName.trim() === '') {
+                    dataToInject.middleName = ''; // will be empty in stacked text
+                }
+
+                // Set default for social media if missing
+                if (!dataToInject.socialMedia || dataToInject.socialMedia.trim() === '') {
+                    dataToInject.socialMedia = 'N/A';
+                }
             }
 
             html = TemplateManager.injectData(html, dataToInject, this.userImage, this.getEffectiveLogo(), this.departmentLogo);
@@ -664,6 +827,32 @@ const App = {
                 const specSec = area.querySelector('#section-specialization');
                 if (specSec && (!this.formData.specialization || this.formData.specialization.trim() === '')) {
                     specSec.remove();
+                }
+                const igSec = area.querySelector('#section-instagram');
+                if (igSec && (!this.formData.instagram || this.formData.instagram.trim() === '')) {
+                    igSec.remove();
+                }
+                const twSec = area.querySelector('#section-twitter');
+                if (twSec && (!this.formData.twitter || this.formData.twitter.trim() === '')) {
+                    twSec.remove();
+                }
+                const deptSec = area.querySelector('#section-dept-logo');
+                if (deptSec && !this.departmentLogo) {
+                    deptSec.remove();
+                }
+            } else if (this.selectedTemplateId === 'template_3') {
+                const smSec = area.querySelector('#t3-social-media');
+                if (smSec && (!this.formData.socialMedia || this.formData.socialMedia.trim() === '')) {
+                    smSec.style.display = 'none';
+                }
+            } else if (this.selectedTemplateId === 'template_2' || this.selectedTemplateId === 'template_test') {
+                const posSec = area.querySelector('#section-position');
+                if (posSec && (!this.formData.positionHeld || this.formData.positionHeld.trim() === '')) {
+                    posSec.remove();
+                }
+                const palSec = area.querySelector('#section-class-pals');
+                if (palSec && (!this.formData.classPals || this.formData.classPals.trim() === '')) {
+                    palSec.remove();
                 }
                 const igSec = area.querySelector('#section-instagram');
                 if (igSec && (!this.formData.instagram || this.formData.instagram.trim() === '')) {

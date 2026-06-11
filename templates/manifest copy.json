@@ -82,5 +82,40 @@
             "twitter",
             "photo"
         ]
+    },
+    {
+        "id": "template_3",
+        "name": "Personality of the Day (Black & Gold)",
+        "file": "template_3.html",
+        "screenshot": "screenshots/template_3.png",
+        "description": "A sleek black and gold themed FYB card focusing on personality and class favorites.",
+        "colors": [
+            "#0a0a0a",
+            "#ffaa00",
+            "#ffffff"
+        ],
+        "fields": [
+            "surname",
+            "firstName",
+            "middleName",
+            "nickName",
+            "department",
+            "university",
+            "universityLogo",
+            "orgFullName",
+            "dob",
+            "tribe",
+            "stateOrigin",
+            "relationshipStatus",
+            "hobbies",
+            "favoriteLecturer",
+            "favoriteLevel",
+            "toughestLevel",
+            "ifNotDept",
+            "bestClassBuddies",
+            "bestQuote",
+            "socialMedia",
+            "photo"
+        ]
     }
 ]

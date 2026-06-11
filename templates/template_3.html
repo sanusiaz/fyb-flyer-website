@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --t3-bg-black: #0a0a0a;
+            --t3-gold: #f4aa24;
+            --t3-text-light: #e5e5e5;
+            --t3-panel-bg: rgba(25, 25, 25, 0.85);
+            --t3-input-bg: rgba(40, 40, 40, 0.6);
+            --t3-input-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #fyb-template {
+            width: 1080px;
+            height: 1350px; /* 4:5 aspect ratio suitable for Instagram */
+            background-color: var(--t3-bg-black);
+            /* Creating the golden glow on the right */
+            background-image: radial-gradient(circle at 100% 50%, rgba(244, 170, 36, 0.25) 0%, rgba(10, 10, 10, 1) 60%);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            color: white;
+        }
+
+        /* Top Header Area */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .header-logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .uni-name {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .dept-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--t3-text-light);
+            text-transform: uppercase;
+        }
+
+        .class-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--t3-gold);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .class-name::before, .class-name::after {
+            content: '';
+            display: inline-block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--t3-gold);
+            position: relative;
+        }
+
+        .class-name::before {
+            background: linear-gradient(to right, transparent, var(--t3-gold));
+        }
+
+        .class-name::after {
+            background: linear-gradient(to left, transparent, var(--t3-gold));
+        }
+
+        /* Diamond accents */
+        .diamond {
+            width: 8px;
+            height: 8px;
+            background-color: var(--t3-gold);
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Left Column */
+        .left-col {
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        /* Personality of the Day Title */
+        .title-art {
+            font-family: 'Bangers', cursive;
+            font-size: 72px;
+            line-height: 0.85;
+            color: #ff5500;
+            text-shadow: 
+                -2px -2px 0 #fff,  
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                2px 2px 0 #fff,
+                0px 6px 0px var(--t3-gold),
+                0px 0px 15px rgba(0,0,0,0.8);
+            transform: rotate(-3deg);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 5;
+            letter-spacing: 2px;
+        }
+
+        .title-art span {
+            display: block;
+            margin-left: 20px;
+        }
+
+        .title-swoosh {
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 300px;
+            height: 20px;
+            background: transparent;
+            border-bottom: 8px solid #ff3300;
+            border-radius: 50%;
+            transform: rotate(-5deg);
+        }
+
+        /* Stamp Frame Photo */
+        .photo-container {
+            position: relative;
+            width: 380px;
+            height: 480px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            transform: rotate(-3deg);
+            background-color: var(--t3-gold);
+            padding: 18px;
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.6);
+            /* CSS jagged stamp effect */
+            mask-image: radial-gradient(#fff 4px, transparent 4px);
+            mask-size: 20px 20px;
+            mask-position: -10px -10px;
+            -webkit-mask-image: radial-gradient(circle at 10px 10px, transparent 6px, black 7px);
+            -webkit-mask-size: 24px 24px;
+            -webkit-mask-position: -12px -12px;
+        }
+
+        /* If mask isn't perfect in html2canvas, fallback to pure border */
+        .photo-container-fallback {
+            position: relative;
+            width: 380px;
+            height: 480px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            transform: rotate(-3deg);
+            background-color: var(--t3-gold);
+            padding: 20px;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.8);
+            border-radius: 4px;
+            /* Using dotted border for the stamp look if needed, but solid is safer for html2canvas */
+        }
+        
+        .photo-container-fallback::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 12px dotted var(--t3-bg-black);
+            pointer-events: none;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        /* Name Section */
+        .meet-badge {
+            background: white;
+            color: black;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 6px 16px;
+            display: inline-block;
+            margin-left: 30px;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .name-stacked {
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: -5px;
+            margin-bottom: 10px;
+        }
+
+        .name-stacked span {
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--t3-gold);
+            line-height: 1;
+            text-transform: capitalize;
+            letter-spacing: -1px;
+        }
+
+        .nickname {
+            margin-left: 30px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #b3b3b3;
+        }
+
+        /* Right Column Panel */
+        .right-col {
+            flex: 1;
+            background: var(--t3-panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 20px;
+        }
+        .field-row .field-group {
+            flex: 1;
+        }
+
+        .field-label {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--t3-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .field-value {
+            background: var(--t3-input-bg);
+            border: 1px solid var(--t3-input-border);
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            line-height: 1.4;
+        }
+
+        .field-value.quote {
+            min-height: 100px;
+            align-items: flex-start;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Bottom Graphic */
+        .bottom-graphic {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 400px;
+            opacity: 0.9;
+            z-index: 2;
+        }
+        
+        .footer-text {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="fyb-template">
+        <!-- Background Swoosh lines (optional decorative) -->
+        <svg style="position:absolute; top:300px; left:200px; width:600px; height:600px; opacity:0.1; pointer-events:none; z-index:1;" viewBox="0 0 100 100">
+            <path d="M0,50 Q25,10 50,50 T100,50" fill="none" stroke="#f4aa24" stroke-width="0.5"/>
+            <path d="M0,60 Q25,20 50,60 T100,60" fill="none" stroke="#ffffff" stroke-width="0.2"/>
+        </svg>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-logo">
+                <img src="{{universityLogo}}" alt="Logo">
+            </div>
+            <div class="header-text">
+                <div class="uni-name">{{university}}</div>
+                <div class="dept-name">{{department}}</div>
+                <div class="class-name">
+                    <div class="diamond"></div>
+                    {{orgFullName}}
+                    <div class="diamond"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-col">
+                <div class="title-art">
+                    Personality
+                    <span>of the day</span>
+                    <div class="title-swoosh"></div>
+                </div>
+
+                <!-- Using fallback for better html2canvas compatibility -->
+                <div class="photo-container-fallback">
+                    <img src="{{photo}}" class="photo-img" alt="Student Photo">
+                </div>
+
+                <div class="meet-badge">Meet</div>
+
+                <div class="name-stacked">
+                    <span style="font-size: 48px;">{{surname}}</span>
+                    <span style="font-size: 56px;">{{firstName}}</span>
+                    <span style="font-size: 42px;">{{middleName}}</span>
+                </div>
+
+                <div class="nickname">{{nickName}}</div>
+            </div>
+
+            <!-- Right Column Data Panel -->
+            <div class="right-col">
+                
+                <div class="field-row">
+                    <div class="field-group">
+                        <div class="field-label">DOB</div>
+                        <div class="field-value">{{dob}}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Tribe</div>
+                        <div class="field-value">{{tribe}}</div>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <div class="field-label">State of Origin</div>
+                        <div class="field-value">{{stateOrigin}}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Relationship Status</div>
+                        <div class="field-value">{{relationshipStatus}}</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Hobbies</div>
+                    <div class="field-value">{{hobbies}}</div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Favorite Lecturer</div>
+                    <div class="field-value">{{favoriteLecturer}}</div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <div class="field-label">Favorite Level</div>
+                        <div class="field-value">{{favoriteLevel}}</div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Toughest Level</div>
+                        <div class="field-value">{{toughestLevel}}</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">If Not {{department}}?</div>
+                    <div class="field-value">{{ifNotDept}}</div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Best Class Buddies</div>
+                    <div class="field-value">{{bestClassBuddies}}</div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-label">Favorite Quote</div>
+                    <div class="field-value quote">{{bestQuote}}</div>
+                </div>
+
+                <div class="field-group" id="t3-social-media">
+                    <div class="field-label">Social Media Handles</div>
+                    <div class="field-value">{{socialMedia}}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Graduation Cap SVG -->
+        <svg class="bottom-graphic" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M256 76L16 186.6L256 297.2L496 186.6L256 76Z" fill="#1a1a1a"/>
+            <path d="M256 76L16 186.6L256 297.2L496 186.6L256 76Z" stroke="#333" stroke-width="4"/>
+            <path d="M96 223.5V364C96 386 167.6 404 256 404C344.4 404 416 386 416 364V223.5" fill="#1a1a1a" stroke="#333" stroke-width="4"/>
+            <path d="M496 186.6V346.6" stroke="#f4aa24" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="496" cy="366.6" r="12" fill="#f4aa24"/>
+            <path d="M488 376L470 450H522L504 376" fill="#f4aa24"/>
+        </svg>
+
+        <div class="footer-text">COURTESY: FYB COMMITTEE</div>
+
+    </div>
+
+</body>
+</html>
