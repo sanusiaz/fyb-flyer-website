@@ -118,10 +118,11 @@ const TEMPLATE_FORMS = {
             label: 'Academic',
             fields: [
                 { name: 'department', label: 'Department', type: 'text', placeholder: 'e.g., Automotive Engineering', required: true },
+                { name: 'programName', label: 'Program Name (Program you did while in school)', type: 'text', placeholder: 'e.g., BEng Mechanical Engineering', required: true },
+                { name: 'groupName', label: 'GroupName', type: 'text', placeholder: 'e.g. RPM 24', required: false },
                 { name: 'specialization', label: 'Specialization', type: 'text', placeholder: 'e.g., Vehicle Design', required: true },
                 { name: 'gradYear', label: 'Graduation Year (e.g. 24)', type: 'text', placeholder: 'e.g., 24', required: true },
                 { name: 'positionHeld', label: 'Position you held in the university', type: 'text', placeholder: 'e.g., President', required: false },
-                { name: 'orgFullName', label: 'Organization name (For the position held in the school)', type: 'text', placeholder: 'e.g., AES', required: false }
             ]
         },
         {
@@ -134,7 +135,7 @@ const TEMPLATE_FORMS = {
                 { name: 'worstCourse', label: 'Most stressful course', type: 'text', placeholder: 'e.g., AUTO 401', required: true },
                 { name: 'favoriteCourse', label: 'Favorite course', type: 'text', placeholder: 'e.g., AUTO 501', required: true },
                 { name: 'favoriteLecturer', label: 'Favorite lecturer', type: 'text', placeholder: 'e.g., Dr. Smith', required: true },
-                { name: 'ifNotDept', label: 'If not automotive, what else?', type: 'text', placeholder: 'e.g., Mechanical Engineering', required: true },
+                { name: 'ifNotDept', label: 'If not your department, what else?', type: 'text', placeholder: 'e.g., Mechanical Engineering', required: true },
                 { name: 'ifNotSchool', label: 'If not school, what else?', type: 'text', placeholder: 'e.g., Business', required: true }
             ]
         },
@@ -788,13 +789,13 @@ const App = {
                     dataToInject.specialization = 'None';
                 }
             } else if (this.selectedTemplateId === 'template_2') {
-                const optionalFieldsT2 = ['middleName', 'positionHeld', 'orgFullName', 'classPals', 'instagram', 'twitter'];
+                const optionalFieldsT2 = ['middleName', 'positionHeld', 'orgFullName', 'classPals', 'instagram', 'twitter', 'groupName'];
                 optionalFieldsT2.forEach(field => {
                     if (!dataToInject[field] || dataToInject[field].trim() === '') {
                         dataToInject[field] = 'None';
                     }
                 });
-                
+
                 // Hide middleName if missing instead of showing 'None'
                 if (!dataToInject.middleName || dataToInject.middleName.trim() === 'None') {
                     dataToInject.middleName = ''; // will be empty in stacked text
@@ -846,6 +847,11 @@ const App = {
                     smSec.style.display = 'none';
                 }
             } else if (this.selectedTemplateId === 'template_2' || this.selectedTemplateId === 'template_test') {
+                const groupNameSec = area.querySelector('#section-groupName');
+                if (groupNameSec && (!this.formData.groupName || this.formData.groupName.trim() === '')) {
+                    groupNameSec.remove();
+                }
+
                 const posSec = area.querySelector('#section-position');
                 if (posSec && (!this.formData.positionHeld || this.formData.positionHeld.trim() === '')) {
                     posSec.remove();

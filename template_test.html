@@ -308,41 +308,48 @@
                     </div>
                 </div>
 
-            <div style="background: #ffffff;
+                <div style="background: #ffffff;
                         border-radius: 24px;
                         padding: 40px 30px 35px 30px;
                         position: relative;
                         margin-top: 40px;
                         box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                
-                
 
-                <div class="inter" style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 30px; color: #0b3d1f; letter-spacing: -0.5px; text-align: center;">
-                    {{surname}}<br><span style="color: #1bbd36;">{{firstName}} {{middleName}}</span>
+
+
+                    <div class="inter"
+                        style="font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 30px; color: #0b3d1f; letter-spacing: -0.5px; text-align: center;">
+                        {{surname}}<br><span style="color: #1bbd36;">{{firstName}} {{middleName}}</span>
+                    </div>
+
+                    <!-- Divider Line -->
+                    <div style="width: 100%; height: 2px; background: rgba(27,189,54,0.2); margin-bottom: 25px;"></div>
+
+                    <div
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-family: 'Inter', sans-serif;">
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <span
+                                style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">A.K.A</span>
+                            <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{nickName}}</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <span
+                                style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">D.O.B</span>
+                            <span
+                                style="font-size: 20px; font-weight: 800; color: #0b3d1f; text-transform: uppercase;">{{dob}}</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <span
+                                style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">State</span>
+                            <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{stateOrigin}}</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <span
+                                style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">Tribe</span>
+                            <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{tribe}}</span>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Divider Line -->
-                <div style="width: 100%; height: 2px; background: rgba(27,189,54,0.2); margin-bottom: 25px;"></div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-family: 'Inter', sans-serif;">
-                    <div style="display: flex; flex-direction: column; gap: 6px;">
-                        <span style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">A.K.A</span>
-                        <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{nickName}}</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px;">
-                        <span style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">D.O.B</span>
-                        <span style="font-size: 20px; font-weight: 800; color: #0b3d1f; text-transform: uppercase;">{{dob}}</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px;">
-                        <span style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">State</span>
-                        <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{stateOrigin}}</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px;">
-                        <span style="font-size: 14px; font-weight: 800; color: #1bbd36; text-transform: uppercase; letter-spacing: 1.5px;">Tribe</span>
-                        <span style="font-size: 20px; font-weight: 800; color: #0b3d1f;">{{tribe}}</span>
-                    </div>
-                </div>
-            </div>
 
                 <!-- Social Handles -->
                 <div
@@ -567,7 +574,7 @@
                                 d="m15.07 11.25l-.9.92C13.45 12.89 13 13.5 13 15h-2v-.5c0-1.11.45-2.11 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41a2 2 0 0 0-2-2a2 2 0 0 0-2 2H8a4 4 0 0 1 4-4a4 4 0 0 1 4 4a3.2 3.2 0 0 1-.93 2.25M13 19h-2v-2h2M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10c0-5.53-4.5-10-10-10" />
                         </svg></div>
                     <div class="detail-text">
-                        <div class="detail-label">If not Automotive, What else?</div>
+                        <div class="detail-label">If not your department, What else?</div>
                         <div class="detail-value">Mechanical Engineering</div>
                     </div>
                 </div>
